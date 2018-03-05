@@ -22,4 +22,10 @@ describe Product do
       expect{kitkat.release}.to change{kitkat.quantity}.from(10).to(9)
     end
   end
+
+  describe '#reload' do
+    it 'increases the quantity by 5' do
+      expect{kitkat.reload(5)}.to change{kitkat.quantity}.from(10).to(15)
+    end
+  end
 end
