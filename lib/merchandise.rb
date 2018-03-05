@@ -8,6 +8,12 @@ class Merchandise
     @products = generate_products
   end
 
+  def release_product(index)
+    product = @products[index]
+    p product
+    product.release
+  end
+
   private
 
   def generate_products
