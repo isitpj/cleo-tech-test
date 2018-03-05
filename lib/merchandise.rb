@@ -12,6 +12,11 @@ class Merchandise
     product.release
   end
 
+  def reload_product(index, amount)
+    product = @products[index]
+    product.reload(amount)
+  end
+
   private
 
   def generate_products
