@@ -24,4 +24,15 @@ describe Merchandise do
       expect(product).to have_received(:release)
     end
   end
+
+  describe '#reload_product' do
+    it 'calls the product\'s reload method' do
+      product = spy('product')
+      mock_products = [:product, product]
+      allow_any_instance_of(Merchandise).to receive(:generate_products) { mock_products }
+      test_merchandise = Merchandise.new
+      test_merchandise.reload_product(1, 6)
+      expect(product).to have_received(:reload).with(6)
+    end
+  end
 end
