@@ -2,7 +2,13 @@ class Change
   attr_reader :coins
 
   def initialize
-    @coins = [
+    @coins = generate_coins
+  end
+
+  private
+
+  def generate_coins
+    [
       Coin.new(1),
       Coin.new(2),
       Coin.new(5),
