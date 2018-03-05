@@ -2,6 +2,7 @@ require 'machine'
 
 describe Machine do
   let(:machine) { described_class.new }
+  
   describe '#initialize' do
     it 'has a merchandise property that is an instance of Merchandise' do
       expect(machine.merchandise).to be_an_instance_of(Merchandise)
