@@ -11,4 +11,8 @@ class Product
   def release
     @quantity -= 1
   end
+
+  def reload(amount)
+    @quantity += amount
+  end
 end
