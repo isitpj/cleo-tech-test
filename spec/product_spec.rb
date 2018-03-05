@@ -15,6 +15,11 @@ describe Product do
     it 'has a quantity property' do
       expect(kitkat.quantity).to eq 10
     end
+
+    it 'its quantity property is conditionally assigned to 10' do
+      dairy_milk = described_class.new('Dairy Milk', 90)
+      expect(dairy_milk.quantity).to eq 10
+    end
   end
 
   describe '#release' do
