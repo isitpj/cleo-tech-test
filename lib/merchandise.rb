@@ -1,7 +1,6 @@
 require 'product'
 
 class Merchandise
-
   attr_reader :products
 
   def initialize
@@ -10,7 +9,6 @@ class Merchandise
 
   def release_product(index)
     product = @products[index]
-    p product
     product.release
   end
 
@@ -28,5 +26,4 @@ class Merchandise
       Product.new('Diet Pepsi', 150)
     ]
   end
-
 end

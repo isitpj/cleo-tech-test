@@ -1,7 +1,7 @@
 require 'product'
 
 describe Product do
-  let(:kitkat) { described_class.new('Kit Kat', 90, 10)}
+  let(:kitkat) { described_class.new('Kit Kat', 90, 10) }
 
   describe '#initialize' do
     it 'has a name property' do
@@ -24,13 +24,13 @@ describe Product do
 
   describe '#release' do
     it 'decreases the quantity by one' do
-      expect{kitkat.release}.to change{kitkat.quantity}.from(10).to(9)
+      expect { kitkat.release }.to change { kitkat.quantity }.from(10).to(9)
     end
   end
 
   describe '#reload' do
     it 'increases the quantity by 5' do
-      expect{kitkat.reload(5)}.to change{kitkat.quantity}.from(10).to(15)
+      expect { kitkat.reload(5) }.to change { kitkat.quantity }.from(10).to(15)
     end
   end
 end
