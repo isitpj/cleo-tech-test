@@ -1,15 +1,14 @@
 require 'machine'
 
 describe Machine do
+  let(:machine) { described_class.new }
   describe '#initialize' do
-    let(:machine) { described_class.new }
     it 'has a merchandise property that is an instance of Merchandise' do
       expect(machine.merchandise).to be_an_instance_of(Merchandise)
     end
   end
 
   describe '#print_products' do
-    let(:machine) { described_class.new }
     it 'calls puts on STDOUT' do
       allow(STDOUT).to receive(:puts)
       machine.print_products
