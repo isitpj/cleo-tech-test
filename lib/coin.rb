@@ -5,4 +5,8 @@ class Coin
     @value = value
     @quantity = quantity
   end
+
+  def release(amount)
+    @quantity -= amount
+  end
 end
