@@ -4,5 +4,4 @@ class Machine
   def initialize
     @merchandise = Merchandise.new
   end
-
 end
