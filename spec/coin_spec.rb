@@ -2,7 +2,7 @@ require 'coin'
 
 describe Coin do
   let(:coin) { described_class.new(50) }
-  
+
   describe '#initialize' do
     it 'has a value property that is an integer' do
       expect(coin.value).to be_an_instance_of(Integer)
@@ -16,6 +16,12 @@ describe Coin do
   describe '#release' do
     it 'decreases the quantity of a coin' do
       expect { coin.release(2) }.to change { coin.quantity }.from(20).to(18)
+    end
+  end
+
+  describe '#insert' do
+    it 'increases the quantity of a coin' do
+      expect { coin.insert(2) }.to change { coin.quantity }.from(20).to(22)
     end
   end
 end
