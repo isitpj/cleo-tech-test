@@ -7,4 +7,8 @@ class Product
     @price = price
     @quantity = quantity
   end
+
+  def release
+    @quantity -= 1
+  end
 end
