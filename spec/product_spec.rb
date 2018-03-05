@@ -16,4 +16,10 @@ describe Product do
       expect(kitkat.quantity).to eq 10
     end
   end
+
+  describe '#release' do
+    it 'decreases the quantity by one' do
+      expect{kitkat.release}.to change{kitkat.quantity}.from(10).to(9)
+    end
+  end
 end
