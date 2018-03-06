@@ -18,12 +18,12 @@ class Machine
 
   def process_user_selection
     @user_selection = STDIN.gets.chomp.to_i
-    puts "A #{@merchandise.products[@user_selection].name} costs #{@merchandise.products[@user_selection].price}. Please insert coins."
+    STDOUT.puts "A #{@merchandise.products[@user_selection].name} costs #{@merchandise.products[@user_selection].price}p. Please insert coins."
   end
 
   def accept_coins
-    price = @merchandise.products[@user_selection].price
     inserted_coins = []
-    inserted = STDIN.gets.chomp
+    inserted = STDIN.gets.chomp.to_i
+    STDOUT.puts 'Sorry, that is not a valid denomination.' if !(VALID_DENOMINATIONS.include?(inserted))
   end
 end
