@@ -36,4 +36,13 @@ describe Machine do
       expect(STDOUT).to have_received(:puts).at_least(1).times
     end
   end
+
+  describe '#accept_coins' do
+    it 'calls gets to receive user input' do
+      allow(STDIN).to receive(:gets) { '1' }
+      machine.process_user_selection
+      machine.accept_coins
+      expect(STDIN).to have_received(:gets).at_least(2).times
+    end
+  end
 end
