@@ -11,4 +11,9 @@ class Machine
       puts "#{index + 1}. #{product.name}. Price: #{product.price}"
     end
   end
+
+  def process_user_selection
+    index = STDIN.gets.chomp.to_i
+    @user_selection = @merchandise.products[index]
+  end
 end
