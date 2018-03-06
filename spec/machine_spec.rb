@@ -28,5 +28,12 @@ describe Machine do
       machine.process_user_selection
       expect(machine.user_selection).to eq 1
     end
+
+    it 'tells the user the price of the product and asks them to insert coins' do
+      allow(STDOUT).to receive(:puts)
+      allow(STDIN).to receive(:gets) { '1' }
+      machine.process_user_selection
+      expect(STDOUT).to have_received(:puts).at_least(1).times
+    end
   end
 end
