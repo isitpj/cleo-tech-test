@@ -93,10 +93,28 @@ describe Machine do
   end
 
   describe '#return_product' do
-    it 'returns '
+    it 'returns a Product object' do
+      allow(STDIN).to receive(:gets) { '1' }
+      allow(STDOUT).to receive(:puts)
+      machine.process_user_selection
+      expect(machine.return_product).to be_an_instance_of(Product)
+    end
   end
 
   describe '#return_change' do
+    it 'returns an array of integer values' do
+      allow(STDOUT).to receive(:puts)
+      allow(STDIN).to receive(:gets).and_return('50', '20', '20')
+      machine.accept_coins(80)
+      expect(machine.return_change[0]).to be_an(Integer)
+    end
 
+    it 'resets @change_due to nil' do
+      allow(STDOUT).to receive(:puts)
+      allow(STDIN).to receive(:gets).and_return('50', '20', '20')
+      machine.accept_coins(80)
+      machine.return_change
+      expect(machine.change_due).to eq nil
+    end
   end
 end
