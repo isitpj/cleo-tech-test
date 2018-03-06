@@ -28,7 +28,7 @@ class Machine
   def accept_coins(price)
     inserted_coins = []
     inserted = STDIN.gets.chomp.to_i
-    if (VALID_DENOMINATIONS.include?(inserted))
+    if VALID_DENOMINATIONS.include?(inserted)
       inserted_coins << inserted
     else
       STDOUT.puts 'Sorry, that is not a valid denomination.'

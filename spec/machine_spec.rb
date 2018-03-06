@@ -15,7 +15,7 @@ describe Machine do
     end
 
     it 'has a user_selection property that is nil by default' do
-      expect(machine).to have_attributes(:user_selection => nil)
+      expect(machine).to have_attributes(user_selection: nil)
     end
   end
 
@@ -34,7 +34,7 @@ describe Machine do
       expect(machine.user_selection).to eq 1
     end
 
-    it 'tells the user the price of the product and asks them to insert coins' do
+    it 'tells the user the product price and asks them to insert coins' do
       allow(STDOUT).to receive(:puts)
       allow(STDIN).to receive(:gets) { '1' }
       machine.process_user_selection
