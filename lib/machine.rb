@@ -19,7 +19,7 @@ class Machine
   end
 
   def process_user_selection
-    @user_selection = STDIN.gets.chomp.to_i
+    @user_selection = STDIN.gets.chomp.to_i - 1
     product_name = @merchandise.products[@user_selection].name
     product_price = @merchandise.products[@user_selection].price
     STDOUT.puts "A #{product_name} costs #{product_price}p. Please insert coins."
@@ -29,6 +29,24 @@ class Machine
     coins = []
     coins = get_coins(coins, price)
     coins.each { |coin| @change.insert_coin(coin, 1) }
+    total_inserted = coins.reduce(:+)
+    if total_inserted > price
+      change_due = total_inserted - price
+      change = []
+      remainder = change_due
+      until change.reduce(:+) == change_due do
+        @change.coins.each do |coin|
+          if coin.value <= remainder
+            change << coin.value
+            remainder -= coin.value
+            break
+          end
+        end
+      end
+      return change
+    else
+      return coins
+    end
   end
 
   private
