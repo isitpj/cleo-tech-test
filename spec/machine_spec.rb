@@ -35,7 +35,7 @@ describe Machine do
 
     it 'assigns the @user_selection variable to a product' do
       machine.process_user_selection
-      expect(machine.user_selection).to eq 1
+      expect(machine.user_selection).to eq 0
     end
 
     it 'tells the user the product price and asks them to insert coins' do
@@ -70,6 +70,11 @@ describe Machine do
       test_machine = Machine.new
       test_machine.accept_coins(90)
       expect(change).to have_received(:insert_coin).exactly(3).times
+    end
+
+    it 'returns 30p of change' do
+      allow(STDIN).to receive(:gets).and_return('3', '50', '20', '50')
+      expect(machine.accept_coins(90)).to eq [20, 10]
     end
   end
 end
