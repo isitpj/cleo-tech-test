@@ -1,11 +1,13 @@
 require 'merchandise'
+require 'change'
 
 class Machine
   VALID_DENOMINATIONS = [200, 100, 50, 20, 10, 5, 2, 1]
-  attr_reader :merchandise, :user_selection
+  attr_reader :merchandise, :change, :user_selection
 
   def initialize
     @merchandise = Merchandise.new
+    @change = Change.new
     @user_selection = nil
   end
 
