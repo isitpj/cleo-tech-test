@@ -22,4 +22,14 @@ describe Change do
       expect(coin).to have_received(:release).with(1)
     end
   end
+
+  describe '#insert_coin' do
+    it 'calls the coin\'s insert method' do
+      puts 'Not sure InsertCoin is a much better name either...'
+      coin = spy('coin')
+      test_change = stub_generate_coins(coin)
+      test_change.insert_coin(1, 7)
+      expect(coin).to have_received(:insert).with(7)
+    end
+  end
 end
