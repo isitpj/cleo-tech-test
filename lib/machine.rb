@@ -22,7 +22,7 @@ class Machine
     @user_selection = STDIN.gets.chomp.to_i - 1
     product_name = @merchandise.products[@user_selection].name
     product_price = @merchandise.products[@user_selection].price
-    STDOUT.puts "A #{product_name} costs #{product_price}p. Please insert coins."
+    STDOUT.puts "A #{product_name} costs #{product_price}p."
   end
 
   def accept_coins(price)
@@ -38,6 +38,7 @@ class Machine
   def get_coins(coins, price)
     inserted_amount = 0
     while inserted_amount < price
+      puts 'Please insert coins.'
       inserted_coin = STDIN.gets.chomp.to_i
       if VALID_DENOMINATIONS.include?(inserted_coin)
         coins << inserted_coin
