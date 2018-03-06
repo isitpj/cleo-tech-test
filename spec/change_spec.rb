@@ -17,10 +17,7 @@ describe Change do
     it 'calls the coin\'s release method' do
       puts 'Huh, ReleaseCoin? That\'d be a terrible name for a crypto token.'
       coin = spy('coin')
-      allow(coin).to receive(:value) { 1 }
-      mock_coins = [coin]
-      allow_any_instance_of(Change).to receive(:generate_coins) { mock_coins }
-      test_change = Change.new
+      test_change = stub_generate_coins(coin)
       test_change.release_coin(1, 1)
       expect(coin).to have_received(:release).with(1)
     end
