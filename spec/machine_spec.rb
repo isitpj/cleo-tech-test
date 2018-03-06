@@ -41,14 +41,14 @@ describe Machine do
     it 'calls gets to receive user input' do
       allow(STDIN).to receive(:gets) { '1' }
       machine.process_user_selection
-      machine.accept_coins
+      machine.accept_coins(90)
       expect(STDIN).to have_received(:gets).at_least(2).times
     end
 
     it 'will not accept coins that are not a valid denomination' do
       allow(STDIN).to receive(:gets) { '3' }
       allow(STDOUT).to receive(:puts)
-      machine.accept_coins
+      machine.accept_coins(90)
       expect(STDOUT).to have_received(:puts).with 'Sorry, that is not a valid denomination.'
     end
   end
