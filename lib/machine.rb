@@ -35,7 +35,9 @@ class Machine
   end
 
   def return_product
-    return @merchandise.products[@user_selection]
+    product = @merchandise.products[@user_selection]
+    @user_selection = nil
+    return product
   end
 
   def return_change
