@@ -14,6 +14,15 @@ class Change
     coin.release(amount)
   end
 
+  def insert_coin(denomination, amount)
+    coin_index = nil
+    @coins.each_with_index do |coin, index|
+      coin_index = index if coin.value == denomination
+    end
+    coin = @coins[coin_index]
+    coin.insert(amount)
+  end
+
   private
 
   def generate_coins
