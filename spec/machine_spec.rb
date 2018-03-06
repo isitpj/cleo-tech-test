@@ -81,5 +81,10 @@ describe Machine do
       allow(STDIN).to receive(:gets).and_return('20', '20', '20', '20', '50')
       expect(machine.accept_coins(90)).to eq [20, 20]
     end
+
+    it 'decreases the quantity of a coin stored' do
+      allow(STDIN).to receive(:gets).and_return('20', '20', '20', '20', '50')
+      expect { machine.accept_coins(90) }.to change { machine.change.coins[3].quantity }.from(20).to(22)
+    end
   end
 end
