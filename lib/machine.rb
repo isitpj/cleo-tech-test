@@ -21,7 +21,7 @@ class Machine
     STDOUT.puts "A #{@merchandise.products[@user_selection].name} costs #{@merchandise.products[@user_selection].price}p. Please insert coins."
   end
 
-  def accept_coins
+  def accept_coins(price)
     inserted_coins = []
     inserted = STDIN.gets.chomp.to_i
     STDOUT.puts 'Sorry, that is not a valid denomination.' if !(VALID_DENOMINATIONS.include?(inserted))
