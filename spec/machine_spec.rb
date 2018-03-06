@@ -77,7 +77,7 @@ describe Machine do
       expect(machine.accept_coins(90)).to eq [20, 10]
     end
 
-    it 'returns 110p of change' do
+    it 'returns 40p of change' do
       allow(STDIN).to receive(:gets).and_return('20', '20', '20', '20', '50')
       expect(machine.accept_coins(90)).to eq [20, 20]
     end
