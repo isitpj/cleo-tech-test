@@ -30,11 +30,7 @@ class Machine
     coins = get_coins(coins, price)
     coins.each { |coin| @change.insert_coin(coin, 1) }
     total_inserted = coins.reduce(:+)
-    if total_inserted > price
-      get_change(total_inserted, price)
-    else
-      coins
-    end
+    change?(total_inserted, price) ? get_change(total_inserted, price) : coins
   end
 
   private
@@ -55,9 +51,9 @@ class Machine
 
   def get_change(total_inserted, price)
     change_due = total_inserted - price
-    change = []
     remainder = change_due
-    until change.reduce(:+) == change_due do
+    change = []
+    until change.reduce(:+) == change_due
       @change.coins.each do |coin|
         if coin.value <= remainder
           change << coin.value
@@ -67,6 +63,10 @@ class Machine
         end
       end
     end
-    return change
+    change
+  end
+
+  def change?(total, price)
+    total > price
   end
 end
