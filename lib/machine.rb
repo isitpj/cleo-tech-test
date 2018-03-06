@@ -31,7 +31,17 @@ class Machine
     coins = get_coins(coins, price)
     coins.each { |coin| @change.insert_coin(coin, 1) }
     total_inserted = coins.reduce(:+)
-    change?(total_inserted, price) ? get_change(total_inserted, price) : coins
+    change?(total_inserted, price) ? @change_due = get_change(total_inserted, price) : coins
+  end
+
+  def return_product
+    return @merchandise.products[@user_selection]
+  end
+
+  def return_change
+    change = @change_due
+    @change_due = nil
+    return change
   end
 
   private
