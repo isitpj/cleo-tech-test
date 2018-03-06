@@ -17,6 +17,10 @@ describe Machine do
     it 'has a user_selection property that is nil by default' do
       expect(machine).to have_attributes(user_selection: nil)
     end
+
+    it 'has a change_due property that is nil by default' do
+      expect(machine).to have_attributes(change_due: nil)
+    end
   end
 
   describe '#print_products' do
@@ -86,5 +90,13 @@ describe Machine do
       allow(STDIN).to receive(:gets).and_return('20', '20', '20', '20', '50')
       expect { machine.accept_coins(90) }.to change { machine.change.coins[3].quantity }.from(20).to(22)
     end
+  end
+
+  describe '#return_product' do
+    it 'returns '
+  end
+
+  describe '#return_change' do
+
   end
 end
