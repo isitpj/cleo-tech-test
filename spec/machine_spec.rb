@@ -28,49 +28,48 @@ describe Machine do
   end
 
   describe '#process_user_selection' do
-    it 'assigns the @user_selection variable to a product' do
-      allow(STDIN).to receive(:gets) { '1' }
+    before(:each) do
       allow(STDOUT).to receive(:puts)
+      allow(STDIN).to receive(:gets) { '1' }
+    end
+
+    it 'assigns the @user_selection variable to a product' do
       machine.process_user_selection
       expect(machine.user_selection).to eq 1
     end
 
     it 'tells the user the product price and asks them to insert coins' do
-      allow(STDOUT).to receive(:puts)
-      allow(STDIN).to receive(:gets) { '1' }
       machine.process_user_selection
       expect(STDOUT).to have_received(:puts).at_least(1).times
     end
   end
 
   describe '#accept_coins' do
+    before(:each) do
+      allow(STDIN).to receive(:gets).and_return('3', '50', '20', '20')
+      allow(STDOUT).to receive(:puts)
+    end
+
     it 'calls gets to receive user input' do
-      allow(STDIN).to receive(:gets).and_return('50')
       machine.accept_coins(90)
       expect(STDIN).to have_received(:gets).at_least(2).times
     end
 
     it 'will not accept coins that are not a valid denomination' do
-      allow(STDIN).to receive(:gets).and_return('3', '50', '20', '20')
-      allow(STDOUT).to receive(:puts)
       machine.accept_coins(90)
       expect(STDOUT).to have_received(:puts).with 'Sorry, that is not a valid denomination.'
     end
 
     it 'returns the coins that the user has inserted' do
-      allow(STDIN).to receive(:gets).and_return('50', '20', '20')
       expect(machine.accept_coins(90)).to eq [50, 20, 20]
     end
 
     it 'calls the Change class\'s insert_coin method for each coin inserted' do
-      allow(STDIN).to receive(:gets).and_return('50', '20', '20')
       change = spy('change')
-      mock_coins = [double('coin')]
       allow(Change).to receive(:new) { change }
-      allow_any_instance_of(Machine).to receive(:get_coins) { mock_coins }
       test_machine = Machine.new
       test_machine.accept_coins(90)
-      expect(change).to have_received(:insert_coin)
+      expect(change).to have_received(:insert_coin).exactly(3).times
     end
   end
 end
