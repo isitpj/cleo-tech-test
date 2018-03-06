@@ -1,6 +1,7 @@
 require 'merchandise'
 
 class Machine
+  VALID_DENOMINATIONS = [200, 100, 50, 20, 10, 5, 2, 1]
   attr_reader :merchandise, :user_selection
 
   def initialize
@@ -18,5 +19,11 @@ class Machine
   def process_user_selection
     @user_selection = STDIN.gets.chomp.to_i
     puts "A #{@merchandise.products[@user_selection].name} costs #{@merchandise.products[@user_selection].price}. Please insert coins."
+  end
+
+  def accept_coins
+    price = @merchandise.products[@user_selection].price
+    inserted_coins = []
+    inserted = STDIN.gets.chomp
   end
 end
