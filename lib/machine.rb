@@ -31,21 +31,9 @@ class Machine
     coins.each { |coin| @change.insert_coin(coin, 1) }
     total_inserted = coins.reduce(:+)
     if total_inserted > price
-      change_due = total_inserted - price
-      change = []
-      remainder = change_due
-      until change.reduce(:+) == change_due do
-        @change.coins.each do |coin|
-          if coin.value <= remainder
-            change << coin.value
-            remainder -= coin.value
-            break
-          end
-        end
-      end
-      return change
+      get_change(total_inserted, price)
     else
-      return coins
+      coins
     end
   end
 
@@ -63,5 +51,22 @@ class Machine
       end
     end
     coins
+  end
+
+  def get_change(total_inserted, price)
+    change_due = total_inserted - price
+    change = []
+    remainder = change_due
+    until change.reduce(:+) == change_due do
+      @change.coins.each do |coin|
+        if coin.value <= remainder
+          change << coin.value
+          remainder -= coin.value
+          @change.release_coin(coin.value, 1)
+          break
+        end
+      end
+    end
+    return change
   end
 end
