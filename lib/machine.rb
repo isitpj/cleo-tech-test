@@ -26,9 +26,9 @@ class Machine
   end
 
   def accept_coins(price)
-    inserted_coins = []
-    inserted_coins = get_coins(inserted_coins, price)
-    inserted_coins.each { |coin| @change.insert_coin(coin, 1) }
+    coins = []
+    coins = get_coins(coins, price)
+    coins.each { |coin| @change.insert_coin(coin, 1) }
   end
 
   private
