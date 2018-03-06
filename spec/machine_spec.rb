@@ -30,6 +30,7 @@ describe Machine do
   describe '#process_user_selection' do
     it 'assigns the @user_selection variable to a product' do
       allow(STDIN).to receive(:gets) { '1' }
+      allow(STDOUT).to receive(:puts)
       machine.process_user_selection
       expect(machine.user_selection).to eq 1
     end
@@ -59,6 +60,17 @@ describe Machine do
     it 'returns the coins that the user has inserted' do
       allow(STDIN).to receive(:gets).and_return('50', '20', '20')
       expect(machine.accept_coins(90)).to eq [50, 20, 20]
+    end
+
+    it 'calls the Change class\'s insert_coin method for each coin inserted' do
+      allow(STDIN).to receive(:gets).and_return('50', '20', '20')
+      change = spy('change')
+      mock_coins = [double('coin')]
+      allow(Change).to receive(:new) { change }
+      allow_any_instance_of(Machine).to receive(:get_coins) { mock_coins }
+      test_machine = Machine.new
+      test_machine.accept_coins(90)
+      expect(change).to have_received(:insert_coin)
     end
   end
 end
