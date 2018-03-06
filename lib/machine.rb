@@ -1,3 +1,5 @@
+require 'merchandise'
+
 class Machine
   attr_reader :merchandise, :user_selection
 
@@ -10,6 +12,7 @@ class Machine
     @merchandise.products.each_with_index do |product, index|
       puts "#{index + 1}. #{product.name}. Price: #{product.price}"
     end
+    puts 'Please enter \'reload\' to add more products or change to the machine.'
   end
 
   def process_user_selection
