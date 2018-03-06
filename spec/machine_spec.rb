@@ -1,5 +1,6 @@
 require 'machine'
 require 'merchandise'
+require 'change'
 
 describe Machine do
   let(:machine) { described_class.new }
@@ -7,6 +8,10 @@ describe Machine do
   describe '#initialize' do
     it 'has a merchandise property that is an instance of Merchandise' do
       expect(machine.merchandise).to be_an_instance_of(Merchandise)
+    end
+
+    it 'has a change property that is an instance of Change' do
+      expect(machine.change).to be_an_instance_of(Change)
     end
 
     it 'has a user_selection property that is nil by default' do
