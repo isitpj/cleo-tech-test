@@ -14,5 +14,6 @@ class Machine
 
   def process_user_selection
     @user_selection = STDIN.gets.chomp.to_i
+    puts "A #{@merchandise.products[@user_selection].name} costs #{@merchandise.products[@user_selection].price}. Please insert coins."
   end
 end
