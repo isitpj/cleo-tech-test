@@ -13,7 +13,6 @@ class Machine
   end
 
   def process_user_selection
-    index = STDIN.gets.chomp.to_i
-    @user_selection = @merchandise.products[index]
+    @user_selection = STDIN.gets.chomp.to_i
   end
 end

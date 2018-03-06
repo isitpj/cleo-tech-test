@@ -26,7 +26,7 @@ describe Machine do
     it 'assigns the @user_selection variable to a product' do
       allow(STDIN).to receive(:gets) { '1' }
       machine.process_user_selection
-      expect(machine.user_selection.name).to eq 'Dairy Milk'
+      expect(machine.user_selection).to eq 1
     end
   end
 end
