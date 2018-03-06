@@ -1,8 +1,9 @@
 class Machine
-  attr_reader :merchandise
+  attr_reader :merchandise, :user_selection
 
   def initialize
     @merchandise = Merchandise.new
+    @user_selection = nil
   end
 
   def print_products
