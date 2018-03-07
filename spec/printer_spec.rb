@@ -1,12 +1,16 @@
 require 'printer'
 
 describe Printer do
+  let(:printer) { described_class.new }
+
+  before(:each) do
+    allow(STDOUT).to receive(:puts)
+  end
+
   describe '#print_product' do
     it 'prints out a product' do
-      allow(STDOUT).to receive(:puts)
       product = double('product')
       allow(product).to receive_messages(name: 'Dairy Milk', price: 80)
-      printer = Printer.new
       printer.print_product(product, 1)
       expect(STDOUT).to have_received(:puts)
     end
@@ -14,8 +18,6 @@ describe Printer do
 
   describe '#print_reload_option' do
     it 'prints a string offering the user the option to reload the machine' do
-      allow(STDOUT).to receive(:puts)
-      printer = Printer.new
       printer.print_reload_option
       expect(STDOUT).to have_received(:puts)
     end
