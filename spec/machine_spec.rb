@@ -49,14 +49,22 @@ describe Machine do
   describe '#process_user_selection' do
     before(:each) do
       allow(STDOUT).to receive(:puts)
-      allow(STDIN).to receive(:gets) { '1' }
     end
 
-    it 'calls #print_product' do
+    it 'calls #print_product private method' do
+      allow(STDIN).to receive(:gets) { '1' }
       allow(machine).to receive(:print_product)
       machine.assign_user_selection
       machine.process_user_selection
       expect(machine).to have_received(:print_product)
+    end
+
+    it 'calls #print_reload_options private method' do
+      allow(STDIN).to receive(:gets) { 'reload' }
+      allow(machine).to receive(:print_reload_options)
+      machine.assign_user_selection
+      machine.process_user_selection
+      expect(machine).to have_received(:print_reload_options)
     end
   end
 
