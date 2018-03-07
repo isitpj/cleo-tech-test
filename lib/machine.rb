@@ -16,7 +16,7 @@ class Machine
 
   def print_products
     @merchandise.products.each_with_index do |product, index|
-      puts "#{index + 1}. #{product.name}. Price: #{product.price}"
+      @printer.print_product(product, index)
     end
     puts 'Please enter \'reload\' to add more products or change to the machine.'
   end
