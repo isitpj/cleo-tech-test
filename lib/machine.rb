@@ -26,6 +26,7 @@ class Machine
 
   def process_user_selection
     print_product if @user_selection.class == Integer
+    print_reload_options if @user_selection == 'reload'
   end
 
   def accept_coins(price)
@@ -90,5 +91,9 @@ class Machine
     product_name = @merchandise.products[@user_selection].name
     product_price = @merchandise.products[@user_selection].price
     STDOUT.puts "A #{product_name} costs #{product_price}p."
+  end
+
+  def print_reload_options
+    puts 'Would you like to reload products or change?'
   end
 end
