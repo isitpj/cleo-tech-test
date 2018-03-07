@@ -20,10 +20,10 @@ class Machine
   end
 
   def process_user_selection
-    @user_selection = STDIN.gets.chomp.to_i - 1
-    product_name = @merchandise.products[@user_selection].name
-    product_price = @merchandise.products[@user_selection].price
-    STDOUT.puts "A #{product_name} costs #{product_price}p."
+    input = STDIN.gets.chomp.downcase
+    p input == 'reload'
+    input == 'reload' ? @user_selection = input : @user_selection = input.to_i - 1
+    print_product if @user_selection.class == Integer
   end
 
   def accept_coins(price)
@@ -82,5 +82,11 @@ class Machine
 
   def change?(total, price)
     total > price
+  end
+
+  def print_product
+    product_name = @merchandise.products[@user_selection].name
+    product_price = @merchandise.products[@user_selection].price
+    STDOUT.puts "A #{product_name} costs #{product_price}p."
   end
 end
