@@ -4,10 +4,14 @@ class Printer
   end
 
   def print_reload_option
-    puts 'Please enter \'reload\' to add more products or change to the machine.'
+    STDOUT.puts 'Please enter \'reload\' to add more products or change to the machine.'
   end
 
   def request_coins
-    puts 'Please insert coins.'
+    STDOUT.puts 'Please insert coins.'
+  end
+
+  def invalid_coin_inserted
+    STDOUT.puts 'Sorry, that is not a valid denomination.'
   end
 end
