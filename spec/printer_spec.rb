@@ -36,4 +36,11 @@ describe Printer do
       expect(STDOUT).to have_received(:puts)
     end
   end
+
+  describe '#print_reload_options' do
+    it 'prints a string asking the user if they would like to reload products or change' do
+      printer.print_reload_options
+      expect(STDOUT).to have_received(:puts)
+    end
+  end
 end
