@@ -22,4 +22,11 @@ describe Printer do
       expect(STDOUT).to have_received(:puts)
     end
   end
+
+  describe '#request_coins' do
+    it 'prints a string asking the user to insert coins' do
+      printer.request_coins
+      expect(STDOUT).to have_received(:puts)
+    end
+  end
 end
