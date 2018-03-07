@@ -29,4 +29,11 @@ describe Printer do
       expect(STDOUT).to have_received(:puts)
     end
   end
+
+  describe '#invalid_coin_inserted' do
+    it 'prints a string informing the user that they have tried to insert an invalid coin' do
+      printer.invalid_coin_inserted
+      expect(STDOUT).to have_received(:puts)
+    end
+  end
 end
