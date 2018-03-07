@@ -31,26 +31,32 @@ describe Machine do
     end
   end
 
+  describe '#assign_user_selection' do
+
+    it 'assigns the @user_selection variable to an integer' do
+      allow(STDIN).to receive(:gets) { '1' }
+      machine.assign_user_selection
+      expect(machine.user_selection).to eq 0
+    end
+
+    it 'assigns the @user_selection variable to \'reload\'' do
+      allow(STDIN).to receive(:gets) { 'reload' }
+      machine.assign_user_selection
+      expect(machine.user_selection).to eq 'reload'
+    end
+  end
+
   describe '#process_user_selection' do
     before(:each) do
       allow(STDOUT).to receive(:puts)
       allow(STDIN).to receive(:gets) { '1' }
     end
 
-    it 'assigns the @user_selection variable to an integer' do
+    it 'calls #print_product' do
+      allow(machine).to receive(:print_product)
+      machine.assign_user_selection
       machine.process_user_selection
-      expect(machine.user_selection).to eq 0
-    end
-
-    it 'tells the user the product name and price' do
-      machine.process_user_selection
-      expect(STDOUT).to have_received(:puts).at_least(1).times
-    end
-
-    it 'assigns the @user_selection variable to \'reload\'' do
-      allow(STDIN).to receive(:gets) { 'reload' }
-      machine.process_user_selection
-      expect(machine.user_selection).to eq 'reload'
+      expect(machine).to have_received(:print_product)
     end
   end
 
@@ -102,6 +108,7 @@ describe Machine do
     before(:each) do
       allow(STDIN).to receive(:gets) { '1' }
       allow(STDOUT).to receive(:puts)
+      machine.assign_user_selection
       machine.process_user_selection
     end
 
