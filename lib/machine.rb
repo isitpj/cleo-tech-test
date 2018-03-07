@@ -19,10 +19,12 @@ class Machine
     puts 'Please enter \'reload\' to add more products or change to the machine.'
   end
 
-  def process_user_selection
+  def assign_user_selection
     input = STDIN.gets.chomp.downcase
-    p input == 'reload'
     input == 'reload' ? @user_selection = input : @user_selection = input.to_i - 1
+  end
+
+  def process_user_selection
     print_product if @user_selection.class == Integer
   end
 
