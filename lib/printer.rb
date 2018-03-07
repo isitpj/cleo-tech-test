@@ -6,4 +6,8 @@ class Printer
   def print_reload_option
     puts 'Please enter \'reload\' to add more products or change to the machine.'
   end
+
+  def request_coins
+    puts 'Please insert coins.'
+  end
 end
