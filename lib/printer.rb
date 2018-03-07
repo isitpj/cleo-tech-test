@@ -14,4 +14,8 @@ class Printer
   def invalid_coin_inserted
     STDOUT.puts 'Sorry, that is not a valid denomination.'
   end
+
+  def print_reload_options
+    STDOUT.puts 'Would you like to reload products or change?'
+  end
 end
