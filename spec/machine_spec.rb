@@ -37,14 +37,20 @@ describe Machine do
       allow(STDIN).to receive(:gets) { '1' }
     end
 
-    it 'assigns the @user_selection variable to a product' do
+    it 'assigns the @user_selection variable to an integer' do
       machine.process_user_selection
       expect(machine.user_selection).to eq 0
     end
 
-    it 'tells the user the product price and asks them to insert coins' do
+    it 'tells the user the product name and price' do
       machine.process_user_selection
       expect(STDOUT).to have_received(:puts).at_least(1).times
+    end
+
+    it 'assigns the @user_selection variable to \'reload\'' do
+      allow(STDIN).to receive(:gets) { 'reload' }
+      machine.process_user_selection
+      expect(machine.user_selection).to eq 'reload'
     end
   end
 
