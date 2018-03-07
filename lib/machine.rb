@@ -56,13 +56,13 @@ class Machine
   def get_coins(coins, price)
     inserted_amount = 0
     while inserted_amount < price
-      puts 'Please insert coins.'
+      @printer.request_coins
       inserted_coin = STDIN.gets.chomp.to_i
       if VALID_DENOMINATIONS.include?(inserted_coin)
         coins << inserted_coin
         inserted_amount += inserted_coin
       else
-        STDOUT.puts 'Sorry, that is not a valid denomination.'
+        @printer.invalid_coin_inserted
       end
     end
     coins
