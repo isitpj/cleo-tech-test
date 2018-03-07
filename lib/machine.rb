@@ -18,7 +18,7 @@ class Machine
     @merchandise.products.each_with_index do |product, index|
       @printer.print_product(product, index)
     end
-    puts 'Please enter \'reload\' to add more products or change to the machine.'
+    @printer.print_reload_option
   end
 
   def assign_user_selection
