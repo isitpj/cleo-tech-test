@@ -92,10 +92,10 @@ class Machine
   def print_product
     product_name = @merchandise.products[@user_selection].name
     product_price = @merchandise.products[@user_selection].price
-    STDOUT.puts "A #{product_name} costs #{product_price}p."
+    @printer.print_product(@merchandise.products[@user_selection], @user_selection)
   end
 
   def print_reload_options
-    puts 'Would you like to reload products or change?'
+    @printer.print_reload_options
   end
 end
