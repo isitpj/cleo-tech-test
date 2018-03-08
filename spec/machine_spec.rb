@@ -78,12 +78,13 @@ describe Machine do
       allow(STDOUT).to receive(:puts)
     end
 
-    it 'calls #print_product private method' do
+    it 'calls #dispense' do
       allow(STDIN).to receive(:gets) { '1' }
-      allow(machine).to receive(:print_product)
+      allow(machine).to receive(:dispense)
+      allow(machine).to receive(:return_product)
       machine.assign_user_selection
       machine.process_user_selection
-      expect(machine).to have_received(:print_product)
+      expect(machine).to have_received(:dispense)
     end
 
     it 'calls #print_reload_options private method' do
@@ -200,17 +201,15 @@ describe Machine do
   end
 
   describe '#return_product' do
-    before(:each) do
+    it 'returns a Product object' do
       allow(STDIN).to receive(:gets) { '1' }
       machine.assign_user_selection
-      machine.process_user_selection
-    end
-
-    it 'returns a Product object' do
       expect(machine.return_product).to be_an_instance_of(Product)
     end
 
     it 'resets @user_selection to nil' do
+      allow(STDIN).to receive(:gets) { '1' }
+      machine.assign_user_selection
       machine.return_product
       expect(machine.user_selection).to eq nil
     end
