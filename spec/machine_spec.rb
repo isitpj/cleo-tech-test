@@ -129,6 +129,18 @@ describe Machine do
     end
   end
 
+  describe '#reload_coin' do
+    it 'calls the Change class\'s #insert_coin method' do
+      allow(STDIN).to receive(:gets).and_return('100', '5')
+      allow(STDOUT).to receive(:puts)
+      change = spy('change')
+      allow(Change).to receive(:new) { change }
+      test_machine = Machine.new
+      test_machine.reload_coin
+      expect(change).to have_received(:insert_coin).with(100, 5)
+    end
+  end
+
   describe '#return_product' do
     before(:each) do
       allow(STDIN).to receive(:gets) { '1' }
