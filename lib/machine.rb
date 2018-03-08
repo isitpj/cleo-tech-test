@@ -35,6 +35,12 @@ class Machine
     print_reload_options if @user_selection == 'reload'
   end
 
+  def dispense
+    price = @merchandise.products[@user_selection].price
+    accept_coins(price)
+    return_product
+  end
+
   def accept_coins(price)
     coins = get_coins(price)
     coins.each { |coin| @change.insert_coin(coin, 1) }
