@@ -1,6 +1,6 @@
-require 'merchandise'
-require 'change'
-require 'printer'
+require_relative './merchandise'
+require_relative './change'
+require_relative './printer'
 
 class Machine
   VALID_DENOMINATIONS = [200, 100, 50, 20, 10, 5, 2, 1]
@@ -31,7 +31,7 @@ class Machine
   end
 
   def process_user_selection
-    print_product if @user_selection.class == Integer
+    dispense if @user_selection.class == Integer
     print_reload_options if @user_selection == 'reload'
   end
 
