@@ -5,6 +5,7 @@ describe Machine do
 
   before(:each) do
     allow(STDOUT).to receive(:puts)
+    allow(machine).to receive(:loop)
   end
 
   describe '#initialize' do
@@ -36,17 +37,25 @@ describe Machine do
       allow(machine).to receive(:process_user_selection)
     end
 
+    it 'begins a loop' do
+      machine.start
+      expect(machine).to have_received(:loop)
+    end
+
     it 'calls #display_menu' do
+      expect(machine).to receive(:loop).and_yield
       machine.start
       expect(machine).to have_received(:display_menu)
     end
 
     it 'calls #assign_user_selection' do
+      expect(machine).to receive(:loop).and_yield
       machine.start
       expect(machine).to have_received(:assign_user_selection)
     end
 
     it 'calls #process_user_selection' do
+      expect(machine).to receive(:loop).and_yield
       machine.start
       expect(machine).to have_received(:process_user_selection)
     end
@@ -102,6 +111,7 @@ describe Machine do
       allow(machine).to receive(:accept_coins)
       machine.assign_user_selection
       allow(machine).to receive(:return_product)
+      allow(machine).to receive(:return_change)
     end
 
     it 'calls #accept_coins' do
@@ -112,6 +122,11 @@ describe Machine do
     it 'calls #return_product' do
       machine.dispense
       expect(machine).to have_received(:return_product)
+    end
+
+    it 'calls #return_change' do
+      machine.dispense
+      expect(machine).to have_received(:return_change)
     end
   end
 
