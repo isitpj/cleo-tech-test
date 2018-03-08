@@ -25,6 +25,24 @@ class Change
     coin.insert(amount)
   end
 
+  def return_change(coins, price)
+    total_inserted = coins.reduce(:+)
+    change_due = total_inserted - price
+    remainder = change_due
+    change = []
+    until change.reduce(:+) == change_due
+      @coins.each do |coin|
+        if coin.value <= remainder
+          change << coin.value
+          remainder -= coin.value
+          release_coin(coin.value, 1)
+          break
+        end
+      end
+    end
+    change
+  end
+
   private
 
   def generate_coins
