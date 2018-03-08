@@ -25,6 +25,30 @@ describe Machine do
     end
   end
 
+  describe '#start' do
+    it 'calls #display_menu' do
+      allow(machine).to receive(:display_menu)
+      allow(machine).to receive(:assign_user_selection)
+      machine.start
+      expect(machine).to have_received(:display_menu)
+    end
+
+    it 'calls #assign_user_selection' do
+      allow(machine).to receive(:display_menu)
+      allow(machine).to receive(:assign_user_selection)
+      machine.start
+      expect(machine).to have_received(:assign_user_selection)
+    end
+
+    it 'calls #process_user_selection' do
+      allow(machine).to receive(:display_menu)
+      allow(machine).to receive(:assign_user_selection)
+      allow(machine).to receive(:process_user_selection)
+      machine.start
+      expect(machine).to have_received(:process_user_selection)
+    end
+  end
+
   describe '#display_menu' do
     it 'calls puts on STDOUT' do
       allow(STDOUT).to receive(:puts)
