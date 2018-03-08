@@ -25,10 +25,10 @@ describe Machine do
     end
   end
 
-  describe '#print_products' do
+  describe '#display_menu' do
     it 'calls puts on STDOUT' do
       allow(STDOUT).to receive(:puts)
-      machine.print_products
+      machine.display_menu
       expect(STDOUT).to have_received(:puts).at_least(1).times
     end
   end
@@ -84,10 +84,6 @@ describe Machine do
     it 'will not accept coins that are not a valid denomination' do
       machine.accept_coins(90)
       expect(STDOUT).to have_received(:puts).with 'Sorry, that is not a valid denomination.'
-    end
-
-    it 'returns the coins that the user has inserted' do
-      expect(machine.accept_coins(90)).to eq [50, 20, 20]
     end
 
     it 'calls the Change class\'s insert_coin method for each coin inserted' do
