@@ -34,7 +34,7 @@ class Machine
 
   def process_user_selection
     dispense if @user_selection.class == Integer
-    print_reload_options if @user_selection == 'reload'
+    get_reload_option if @user_selection == 'reload'
   end
 
   def dispense
