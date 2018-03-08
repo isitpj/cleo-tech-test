@@ -3,6 +3,10 @@ require 'machine'
 describe Machine do
   let(:machine) { described_class.new }
 
+  before(:each) do
+    allow(STDOUT).to receive(:puts)
+  end
+
   describe '#initialize' do
     it 'has a merchandise property that is an instance of Merchandise' do
       expect(machine.merchandise).to be_an_instance_of(Merchandise)
@@ -26,24 +30,23 @@ describe Machine do
   end
 
   describe '#start' do
-    it 'calls #display_menu' do
+    before(:each) do
       allow(machine).to receive(:display_menu)
       allow(machine).to receive(:assign_user_selection)
+      allow(machine).to receive(:process_user_selection)
+    end
+
+    it 'calls #display_menu' do
       machine.start
       expect(machine).to have_received(:display_menu)
     end
 
     it 'calls #assign_user_selection' do
-      allow(machine).to receive(:display_menu)
-      allow(machine).to receive(:assign_user_selection)
       machine.start
       expect(machine).to have_received(:assign_user_selection)
     end
 
     it 'calls #process_user_selection' do
-      allow(machine).to receive(:display_menu)
-      allow(machine).to receive(:assign_user_selection)
-      allow(machine).to receive(:process_user_selection)
       machine.start
       expect(machine).to have_received(:process_user_selection)
     end
@@ -51,7 +54,6 @@ describe Machine do
 
   describe '#display_menu' do
     it 'calls puts on STDOUT' do
-      allow(STDOUT).to receive(:puts)
       machine.display_menu
       expect(STDOUT).to have_received(:puts).at_least(1).times
     end
@@ -96,7 +98,6 @@ describe Machine do
   describe '#accept_coins' do
     before(:each) do
       allow(STDIN).to receive(:gets).and_return('3', '50', '20', '20')
-      allow(STDOUT).to receive(:puts)
     end
 
     it 'calls gets to receive user input' do
@@ -135,7 +136,6 @@ describe Machine do
 
   describe '#get_reload_option' do
     before(:each) do
-      allow(STDOUT).to receive(:puts)
       allow(STDIN).to receive(:gets) { 'product' }
       allow(machine).to receive(:reload_coin)
       allow(machine).to receive(:reload_product)
@@ -161,7 +161,6 @@ describe Machine do
   describe '#reload_product' do
     it 'calls the Merchandise class\' #reload_product method' do
       allow(STDIN).to receive(:gets).and_return('2', '5')
-      allow(STDOUT).to receive(:puts)
       merchandise = spy('merchandise')
       allow(Merchandise).to receive(:new) { merchandise }
       test_machine = Machine.new
@@ -173,7 +172,6 @@ describe Machine do
   describe '#reload_coin' do
     it 'calls the Change class\'s #insert_coin method' do
       allow(STDIN).to receive(:gets).and_return('100', '5')
-      allow(STDOUT).to receive(:puts)
       change = spy('change')
       allow(Change).to receive(:new) { change }
       test_machine = Machine.new
@@ -185,7 +183,6 @@ describe Machine do
   describe '#return_product' do
     before(:each) do
       allow(STDIN).to receive(:gets) { '1' }
-      allow(STDOUT).to receive(:puts)
       machine.assign_user_selection
       machine.process_user_selection
     end
@@ -202,7 +199,6 @@ describe Machine do
 
   describe '#return_change' do
     before(:each) do
-      allow(STDOUT).to receive(:puts)
       allow(STDIN).to receive(:gets).and_return('50', '20', '20')
     end
 
