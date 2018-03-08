@@ -47,6 +47,14 @@ class Machine
     @merchandise.reload_product(product_index, quantity)
   end
 
+  def reload_coin
+    @printer.request_coin_selection
+    denomination = STDIN.gets.chomp.to_i
+    @printer.request_quantity
+    quantity = STDIN.gets.chomp.to_i
+    @change.insert_coin(denomination, quantity)
+  end
+
   def return_product
     product = @merchandise.products[@user_selection]
     @user_selection = nil
