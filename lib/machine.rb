@@ -39,6 +39,14 @@ class Machine
     option = STDIN.gets.chomp
   end
 
+  def reload_product
+    @printer.print_product_selection(@merchandise)
+    product_index = STDIN.gets.chomp.to_i - 1
+    @printer.request_quantity
+    quantity = STDIN.gets.chomp.to_i
+    @merchandise.reload_product(product_index, quantity)
+  end
+
   def return_product
     product = @merchandise.products[@user_selection]
     @user_selection = nil
