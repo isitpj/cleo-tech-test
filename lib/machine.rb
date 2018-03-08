@@ -36,7 +36,8 @@ class Machine
   end
 
   def get_reload_option
-    option = STDIN.gets.chomp
+    option = STDIN.gets.chomp.downcase
+    reload_product if option == 'product'
   end
 
   def reload_product
