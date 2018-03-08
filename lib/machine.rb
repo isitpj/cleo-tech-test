@@ -15,9 +15,11 @@ class Machine
   end
 
   def start
-    display_menu
-    assign_user_selection
-    process_user_selection
+    loop do
+      display_menu
+      assign_user_selection
+      process_user_selection
+    end
   end
 
   def display_menu
@@ -39,6 +41,7 @@ class Machine
     price = @merchandise.products[@user_selection].price
     accept_coins(price)
     return_product
+    return_change
   end
 
   def accept_coins(price)
@@ -103,10 +106,6 @@ class Machine
   def receive_coin
     @printer.request_coins
     STDIN.gets.chomp.to_i
-  end
-
-  def print_product
-    @printer.print_product(@merchandise.products[@user_selection], @user_selection)
   end
 
   def print_reload_options
