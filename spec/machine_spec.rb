@@ -117,6 +117,18 @@ describe Machine do
     end
   end
 
+  describe '#reload_product' do
+    it 'calls the Merchandise class\' #reload_product method' do
+      allow(STDIN).to receive(:gets).and_return('2', '5')
+      allow(STDOUT).to receive(:puts)
+      merchandise = spy('merchandise')
+      allow(Merchandise).to receive(:new) { merchandise }
+      test_machine = Machine.new
+      test_machine.reload_product
+      expect(merchandise).to have_received(:reload_product).with(1, 5)
+    end
+  end
+
   describe '#return_product' do
     before(:each) do
       allow(STDIN).to receive(:gets) { '1' }
