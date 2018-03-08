@@ -34,7 +34,6 @@ describe Machine do
   end
 
   describe '#assign_user_selection' do
-
     it 'assigns the @user_selection variable to an integer' do
       allow(STDIN).to receive(:gets) { '1' }
       machine.assign_user_selection
@@ -107,6 +106,14 @@ describe Machine do
     it 'decreases the quantity of a coin stored' do
       allow(STDIN).to receive(:gets).and_return('20', '20', '20', '20', '50')
       expect { machine.accept_coins(90) }.to change { machine.change.coins[3].quantity }.from(20).to(22)
+    end
+  end
+
+  describe '#get_reload_option' do
+    it 'should get input from the user' do
+      allow(STDIN).to receive(:gets) { 'change' }
+      machine.get_reload_option
+      expect(STDIN).to have_received(:gets)
     end
   end
 
