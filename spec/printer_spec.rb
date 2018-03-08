@@ -7,10 +7,18 @@ describe Printer do
     allow(STDOUT).to receive(:puts)
   end
 
+  describe '#print_product_selection' do
+    it 'prints all the products in the vending machine' do
+      product = double('product', name: 'Dairy Milk', price: 80)
+      merchandise = double('merchandise', products: [product])
+      printer.print_product_selection(merchandise)
+      expect(STDOUT).to have_received(:puts)
+    end
+  end
+
   describe '#print_product' do
     it 'prints out a product' do
-      product = double('product')
-      allow(product).to receive_messages(name: 'Dairy Milk', price: 80)
+      product = double('product', name: 'Dairy Milk', price: 80)
       printer.print_product(product, 1)
       expect(STDOUT).to have_received(:puts)
     end
