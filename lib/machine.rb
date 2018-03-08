@@ -14,6 +14,12 @@ class Machine
     @change_due = nil
   end
 
+  def start
+    display_menu
+    assign_user_selection
+    process_user_selection
+  end
+
   def display_menu
     @printer.print_product_selection(@merchandise)
     @printer.print_reload_option
