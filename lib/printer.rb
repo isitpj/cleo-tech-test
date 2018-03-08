@@ -1,4 +1,10 @@
 class Printer
+  def print_product_selection(merchandise)
+    merchandise.products.each_with_index do |product, index|
+      print_product(product, index)
+    end
+  end
+
   def print_product(product, index)
     STDOUT.puts "#{index + 1}. #{product.name}. Price: #{product.price}"
   end
