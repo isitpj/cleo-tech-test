@@ -36,7 +36,7 @@ class Machine
     coins = get_coins(coins, price)
     coins.each { |coin| @change.insert_coin(coin, 1) }
     total_inserted = coins.reduce(:+)
-    change?(total_inserted, price) ? @change_due = get_change(total_inserted, price) : coins
+    total_inserted > price ? @change_due = @change.return_change(coins, price) : coins
   end
 
   def return_product
@@ -68,30 +68,7 @@ class Machine
     coins
   end
 
-  def get_change(total_inserted, price)
-    change_due = total_inserted - price
-    remainder = change_due
-    change = []
-    until change.reduce(:+) == change_due
-      @change.coins.each do |coin|
-        if coin.value <= remainder
-          change << coin.value
-          remainder -= coin.value
-          @change.release_coin(coin.value, 1)
-          break
-        end
-      end
-    end
-    change
-  end
-
-  def change?(total, price)
-    total > price
-  end
-
   def print_product
-    product_name = @merchandise.products[@user_selection].name
-    product_price = @merchandise.products[@user_selection].price
     @printer.print_product(@merchandise.products[@user_selection], @user_selection)
   end
 
