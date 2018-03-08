@@ -35,6 +35,10 @@ class Machine
     @change_due = @change.return_change(coins, price) if sum(coins) > price
   end
 
+  def get_reload_option
+    option = STDIN.gets.chomp
+  end
+
   def return_product
     product = @merchandise.products[@user_selection]
     @user_selection = nil
