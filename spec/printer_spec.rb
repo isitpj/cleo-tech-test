@@ -51,4 +51,11 @@ describe Printer do
       expect(STDOUT).to have_received(:puts)
     end
   end
+
+  describe '#request_quantity' do
+    it 'prints a string asking the user how many they would like to reload' do
+      printer.request_quantity
+      expect(STDOUT).to have_received(:puts)
+    end
+  end
 end
