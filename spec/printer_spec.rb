@@ -58,4 +58,11 @@ describe Printer do
       expect(STDOUT).to have_received(:puts)
     end
   end
+
+  describe '#request_coin_selection' do
+    it 'prints a string asking the user which coin denomination they would like to reload' do
+      printer.request_coin_selection
+      expect(STDOUT).to have_received(:puts)
+    end
+  end
 end
