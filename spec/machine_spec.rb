@@ -95,6 +95,25 @@ describe Machine do
     end
   end
 
+  describe '#dispense' do
+    it 'calls #accept_coins' do
+      allow(STDIN).to receive(:gets) { '1' }
+      allow(machine).to receive(:accept_coins)
+      machine.assign_user_selection
+      machine.dispense
+      expect(machine).to have_received(:accept_coins)
+    end
+
+    it 'calls #return_product' do
+      allow(STDIN).to receive(:gets) { '1' }
+      allow(machine).to receive(:accept_coins)
+      allow(machine).to receive(:return_product)
+      machine.assign_user_selection
+      machine.dispense
+      expect(machine).to have_received(:return_product)
+    end
+  end
+
   describe '#accept_coins' do
     before(:each) do
       allow(STDIN).to receive(:gets).and_return('3', '50', '20', '20')
