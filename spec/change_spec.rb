@@ -32,4 +32,15 @@ describe Change do
       expect(coin).to have_received(:insert).with(7)
     end
   end
+
+  describe '#return_change' do
+    it 'returns 30p of change' do
+      expect(change.return_change([50, 20, 50], 90)).to eq [20, 10]
+    end
+
+    it 'returns 40p of change' do
+      allow(STDIN).to receive(:gets).and_return('20', '20', '20', '20', '50')
+      expect(change.return_change([20, 20, 20, 20, 50], 90)).to eq [20, 20]
+    end
+  end
 end
