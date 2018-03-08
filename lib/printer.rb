@@ -28,4 +28,8 @@ class Printer
   def request_quantity
     STDOUT.puts 'How many would you like to reload?'
   end
+
+  def request_coin_selection
+    STDOUT.puts 'What denomination of coin would you like to reload? Please input either 1, 2, 5, 10, 20, 50, 100, or 200.'
+  end
 end
