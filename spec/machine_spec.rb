@@ -110,23 +110,24 @@ describe Machine do
   end
 
   describe '#get_reload_option' do
-    it 'should get input from the user' do
+    before(:each) do
       allow(STDOUT).to receive(:puts)
-      allow(STDIN).to receive(:gets) { 'change' }
+      allow(STDIN).to receive(:gets) { 'product' }
       allow(machine).to receive(:reload_coin)
+      allow(machine).to receive(:reload_product)
+    end
+
+    it 'should get input from the user' do
       machine.get_reload_option
       expect(STDIN).to have_received(:gets)
     end
 
     it 'calls #reload_product' do
-      allow(machine).to receive(:reload_product)
-      allow(STDIN).to receive(:gets) { 'product' }
       machine.get_reload_option
       expect(machine).to have_received(:reload_product)
     end
 
     it 'calls #reload_coin' do
-      allow(machine).to receive(:reload_coin)
       allow(STDIN).to receive(:gets) { 'change' }
       machine.get_reload_option
       expect(machine).to have_received(:reload_coin)
