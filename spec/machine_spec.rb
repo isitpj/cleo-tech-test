@@ -96,12 +96,12 @@ describe Machine do
       expect(machine).to have_received(:dispense)
     end
 
-    it 'calls #print_reload_options private method' do
+    it 'calls #get_reload_option' do
       allow(STDIN).to receive(:gets) { 'reload' }
-      allow(machine).to receive(:print_reload_options)
+      allow(machine).to receive(:get_reload_option)
       machine.assign_user_selection
       machine.process_user_selection
-      expect(machine).to have_received(:print_reload_options)
+      expect(machine).to have_received(:get_reload_option)
     end
   end
 
