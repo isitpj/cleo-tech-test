@@ -115,6 +115,13 @@ describe Machine do
       machine.get_reload_option
       expect(STDIN).to have_received(:gets)
     end
+
+    it 'calls #reload_product' do
+      allow(machine).to receive(:reload_product)
+      allow(STDIN).to receive(:gets) { 'product' }
+      machine.get_reload_option
+      expect(machine).to have_received(:reload_product)
+    end
   end
 
   describe '#reload_product' do
