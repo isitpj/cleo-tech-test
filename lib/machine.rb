@@ -14,10 +14,8 @@ class Machine
     @change_due = nil
   end
 
-  def print_products
-    @merchandise.products.each_with_index do |product, index|
-      @printer.print_product(product, index)
-    end
+  def display_menu
+    @printer.print_product_selection(@merchandise)
     @printer.print_reload_option
   end
 
@@ -32,11 +30,9 @@ class Machine
   end
 
   def accept_coins(price)
-    coins = []
-    coins = get_coins(coins, price)
+    coins = get_coins(price)
     coins.each { |coin| @change.insert_coin(coin, 1) }
-    total_inserted = coins.reduce(:+)
-    total_inserted > price ? @change_due = @change.return_change(coins, price) : coins
+    @change_due = @change.return_change(coins, price) if sum(coins) > price
   end
 
   def return_product
@@ -53,19 +49,26 @@ class Machine
 
   private
 
-  def get_coins(coins, price)
-    inserted_amount = 0
-    while inserted_amount < price
-      @printer.request_coins
-      inserted_coin = STDIN.gets.chomp.to_i
-      if VALID_DENOMINATIONS.include?(inserted_coin)
-        coins << inserted_coin
-        inserted_amount += inserted_coin
-      else
-        @printer.invalid_coin_inserted
-      end
+  def get_coins(price)
+    coins = [0]
+    while sum(coins) < price
+      inserted_coin = receive_coin
+      coins << inserted_coin if valid_coin?(inserted_coin)
     end
-    coins
+    coins.drop(1)
+  end
+
+  def sum(array)
+    array.reduce(:+)
+  end
+
+  def valid_coin?(inserted_coin)
+    VALID_DENOMINATIONS.include?(inserted_coin) ? true : @printer.invalid_coin_inserted
+  end
+
+  def receive_coin
+    @printer.request_coins
+    STDIN.gets.chomp.to_i
   end
 
   def print_product
