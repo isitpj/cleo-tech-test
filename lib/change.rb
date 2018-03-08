@@ -1,4 +1,4 @@
-require 'coin'
+require_relative './coin'
 
 class Change
   attr_reader :coins
