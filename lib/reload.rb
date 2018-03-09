@@ -1,12 +1,14 @@
 require_relative './printer'
 require_relative './merchandise'
+require_relative './change'
 
 class Reload
-  attr_reader :printer, :merchandise
+  attr_reader :printer, :merchandise, :change
 
-  def initialize(merchandise)
+  def initialize(merchandise, change)
     @printer = Printer.new
     @merchandise = merchandise
+    @change = change
   end
 
   def assign_product_or_change
