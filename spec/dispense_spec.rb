@@ -120,14 +120,5 @@ describe Dispense do
       dispense.accept_coins(80)
       expect(dispense.return_change[0]).to be_an(Integer)
     end
-
-    it 'resets @change_due to nil' do
-      printer = spy('printer')
-      allow(Printer).to receive(:new) { printer }
-      test_dispense = Dispense.new(1, Merchandise.new, Change.new)
-      test_dispense.accept_coins(80)
-      test_dispense.return_change
-      expect(printer).to have_received(:print_return_change)
-    end
   end
 end
