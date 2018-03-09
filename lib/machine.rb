@@ -81,13 +81,13 @@ class Machine
   def return_product
     product = @merchandise.products[@user_selection]
     @user_selection = nil
-    return product
+    @printer.print_return_product(product)
   end
 
   def return_change
     change = @change_due
     @change_due = nil
-    return change
+    @printer.print_return_change(change)
   end
 
   private
