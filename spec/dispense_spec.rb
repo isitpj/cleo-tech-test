@@ -68,4 +68,43 @@ describe Dispense do
       expect { dispense.accept_coins(90) }.to change { dispense.change.coins[3].quantity }.from(20).to(22)
     end
   end
+
+  describe '#return_product' do
+    before(:each) do
+      allow(STDIN).to receive(:gets) { '1' }
+    end
+
+    it 'calls the Printer class\'s #print_return_product method' do
+      printer = spy('printer')
+      allow(Printer).to receive(:new) { printer }
+      test_dispense = Dispense.new(1, Merchandise.new, Change.new)
+      test_dispense.return_product
+      expect(printer).to have_received(:print_return_product)
+    end
+
+    it 'resets @user_selection to nil' do
+      dispense.return_product
+      expect(dispense.selection).to eq nil
+    end
+  end
+
+  describe '#return_change' do
+    before(:each) do
+      allow(STDIN).to receive(:gets).and_return('50', '20', '20')
+    end
+
+    it 'calls the Printer class\'s #print_return_change method' do
+      dispense.accept_coins(80)
+      expect(dispense.return_change[0]).to be_an(Integer)
+    end
+
+    it 'resets @change_due to nil' do
+      printer = spy('printer')
+      allow(Printer).to receive(:new) { printer }
+      test_dispense = Dispense.new(1, Merchandise.new, Change.new)
+      test_dispense.accept_coins(80)
+      test_dispense.return_change
+      expect(printer).to have_received(:print_return_change)
+    end
+  end
 end
