@@ -28,6 +28,7 @@ class Dispense
   end
 
   def return_product
+    @merchandise.release_product(@selection)
     product = @merchandise.products[@selection]
     @selection = nil
     @printer.print_return_product(product)
