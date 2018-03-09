@@ -23,6 +23,12 @@ class Reload
     insert_coins(denomination, quantity)
   end
 
+  def reload_product
+    @printer.print_product_selection(@merchandise)
+    @printer.request_quantity
+    @printer.print_successful_reload
+  end
+
   private
 
   def assign_denomination
@@ -47,10 +53,7 @@ end
 
 
 # def reload_product
-#   @printer.print_product_selection(@merchandise)
 #   product_index = STDIN.gets.chomp.to_i - 1
-#   @printer.request_quantity
 #   quantity = STDIN.gets.chomp.to_i
 #   @merchandise.reload_product(product_index, quantity)
-#   @printer.print_successful_reload
 # end
