@@ -40,18 +40,23 @@ describe Reload do
   end
 
   describe '#reload_coin' do
-    it 'prints three statements to the user' do
+    before(:each) do
       allow(STDOUT).to receive(:puts)
       allow(STDIN).to receive(:gets).and_return('100', '5' )
+      allow(reload.change).to receive(:insert_coin)
       reload.reload_coin
+    end
+
+    it 'prints three statements to the user' do
       expect(STDOUT).to have_received(:puts).exactly(3).times
     end
 
     it 'gets user input twice' do
-      allow(STDOUT).to receive(:puts)
-      allow(STDIN).to receive(:gets).and_return('100', '5' )
-      reload.reload_coin
       expect(STDIN).to have_received(:gets).twice
+    end
+
+    it 'calls the Change class\'s insert_coin method' do
+      expect(reload.change).to have_received(:insert_coin).with(100, 5)
     end
   end
 end
