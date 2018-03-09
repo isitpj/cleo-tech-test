@@ -23,8 +23,9 @@ class Machine
   end
 
   def display_menu
+    @printer.print_welcome_message
     @printer.print_product_selection(@merchandise)
-    @printer.print_reload_option
+    @printer.print_options_message
   end
 
   def assign_user_selection
