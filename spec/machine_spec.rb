@@ -170,56 +170,11 @@ describe Machine do
   end
 
   describe '#reload' do
-    before(:each) do
-      allow(STDIN).to receive(:gets) { 'product' }
-      allow(machine).to receive(:reload_coin)
-      allow(machine).to receive(:reload_product)
-    end
-
-    it 'should call the Printer class\'s #print_reload_options method' do
-      printer = spy('printer')
-      allow(Printer).to receive(:new) { printer }
-      test_machine = Machine.new
-      test_machine.reload
-      expect(printer).to have_received(:print_reload_options)
-    end
-
-    it 'should get input from the user' do
-      machine.reload
-      expect(STDIN).to have_received(:gets)
-    end
-
-    it 'calls #reload_product' do
-      machine.reload
-      expect(machine).to have_received(:reload_product)
-    end
-
-    it 'calls #reload_coin' do
-      allow(STDIN).to receive(:gets) { 'change' }
-      machine.reload
-      expect(machine).to have_received(:reload_coin)
-    end
-  end
-
-  describe '#reload_product' do
-    it 'calls the Merchandise class\' #reload_product method' do
-      allow(STDIN).to receive(:gets).and_return('2', '5')
-      merchandise = spy('merchandise')
-      allow(Merchandise).to receive(:new) { merchandise }
-      test_machine = Machine.new
-      test_machine.reload_product
-      expect(merchandise).to have_received(:reload_product).with(1, 5)
-    end
-  end
-
-  describe '#reload_coin' do
-    it 'calls the Change class\'s #insert_coin method' do
-      allow(STDIN).to receive(:gets).and_return('100', '5')
-      change = spy('change')
-      allow(Change).to receive(:new) { change }
-      test_machine = Machine.new
-      test_machine.reload_coin
-      expect(change).to have_received(:insert_coin).with(100, 5)
+    it 'calls #assign_product_or_change on an instance of Reload' do
+      fake_reload = double('reload')
+      allow(fake_reload).to receive(:assign_product_or_change)
+      machine.reload(fake_reload)
+      expect(fake_reload).to have_received(:assign_product_or_change)
     end
   end
 
