@@ -1,4 +1,10 @@
 class Printer
+  def print_welcome_message
+    STDOUT.puts 'Welcome to the World\'s Best Vending Machine(TM).'
+    STDOUT.puts 'Did you know that the first known vending existed in Alexandria, Egypt, in the first century? Bet you didn\'t.
+    '
+  end
+
   def print_product_selection(merchandise)
     merchandise.products.each_with_index do |product, index|
       print_product(product, index)
@@ -9,8 +15,8 @@ class Printer
     STDOUT.puts "#{index + 1}. #{product.name}. Price: #{product.price}"
   end
 
-  def print_reload_option
-    STDOUT.puts 'Please enter \'reload\' to add more products or change to the machine.'
+  def print_options_message
+    STDOUT.puts 'Please enter a number to make your selection, \'Reload\' if you would like to add more products to the machine, or \'Exit\' if you do not wish to be trapped inside a command-line vending machine for all eternity.'
   end
 
   def request_coins
