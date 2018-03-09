@@ -103,7 +103,11 @@ describe Machine do
   describe '#dispense' do
     it 'calls #dispense on an instance of Reload' do
       fake_dispense = double('dispense')
-      allow(fake_dispense).to receive(:dispense_product)
+      allow(fake_dispense).to receive_messages(
+        dispense_product: nil,
+        merchandise: nil,
+        change: nil
+      )
       machine.dispense(fake_dispense)
       expect(fake_dispense).to have_received(:dispense_product)
     end
@@ -112,7 +116,11 @@ describe Machine do
   describe '#reload' do
     it 'calls #assign_product_or_change on an instance of Reload' do
       fake_reload = double('reload')
-      allow(fake_reload).to receive(:assign_product_or_change)
+      allow(fake_reload).to receive_messages(
+        assign_product_or_change: nil,
+        merchandise: nil,
+        change: nil
+      )
       machine.reload(fake_reload)
       expect(fake_reload).to have_received(:assign_product_or_change)
     end
