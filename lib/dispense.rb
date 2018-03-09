@@ -1,3 +1,7 @@
+require_relative './printer'
+require_relative './merchandise'
+require_relative './change'
+
 class Dispense
   VALID_DENOMINATIONS = [200, 100, 50, 20, 10, 5, 2, 1]
   attr_reader :printer, :selection, :merchandise, :change, :change_due
@@ -8,6 +12,13 @@ class Dispense
     @merchandise = merchandise
     @change = change
     @change_due = nil
+  end
+
+  def dispense
+    price = @merchandise.products[@selection].price
+    accept_coins(price)
+    return_product
+    return_change
   end
 
   def accept_coins(price)
