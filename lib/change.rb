@@ -26,21 +26,9 @@ class Change
   end
 
   def return_change(coins, price)
-    total_inserted = coins.reduce(:+)
-    change_due = total_inserted - price
+    change_due = sum(coins) - price
     remainder = change_due
-    change = []
-    until change.reduce(:+) == change_due
-      @coins.each do |coin|
-        if coin.value <= remainder
-          change << coin.value
-          remainder -= coin.value
-          release_coin(coin.value, 1)
-          break
-        end
-      end
-    end
-    change
+    find_correct_change(change_due, price, remainder)
   end
 
   private
@@ -56,5 +44,29 @@ class Change
       Coin.new(2),
       Coin.new(1)
     ]
+  end
+
+  def sum(coins)
+    coins.reduce(:+)
+  end
+
+  def find_correct_change(change_due, price, remainder)
+    change = []
+    until sum(change) == change_due
+      @coins.each do |coin|
+        if coin.value <= remainder
+          change, remainder = add_coin_to_change_and_release(coin, remainder, change)
+          break
+        end
+      end
+    end
+    change
+  end
+
+  def add_coin_to_change_and_release(coin, remainder, change)
+    change << coin.value
+    remainder -= coin.value
+    release_coin(coin.value, 1)
+    return change, remainder
   end
 end
