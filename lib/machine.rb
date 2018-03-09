@@ -69,6 +69,7 @@ class Machine
     @printer.request_quantity
     quantity = STDIN.gets.chomp.to_i
     @merchandise.reload_product(product_index, quantity)
+    @printer.print_successful_reload
   end
 
   def reload_coin
@@ -77,6 +78,7 @@ class Machine
     @printer.request_quantity
     quantity = STDIN.gets.chomp.to_i
     @change.insert_coin(denomination, quantity)
+    @printer.print_successful_reload
   end
 
   def return_product
