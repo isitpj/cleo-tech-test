@@ -14,13 +14,28 @@ class Reload
   def assign_product_or_change
     @printer.print_reload_options
     selection = STDIN.gets.chomp
+    reload_coin if selection == 'change'
   end
 
   def reload_coin
+    denomination = assign_denomination
+    quantity = assign_quantity
+    insert_coins(denomination, quantity)
+  end
+
+  private
+
+  def assign_denomination
     @printer.request_coin_selection
-    denomination = STDIN.gets.chomp.to_i
+    STDIN.gets.chomp.to_i
+  end
+
+  def assign_quantity
     @printer.request_quantity
-    quantity = STDIN.gets.chomp.to_i
+    STDIN.gets.chomp.to_i
+  end
+
+  def insert_coins(denomination, quantity)
     @change.insert_coin(denomination, quantity)
     @printer.print_successful_reload
   end
@@ -37,14 +52,5 @@ end
 #   @printer.request_quantity
 #   quantity = STDIN.gets.chomp.to_i
 #   @merchandise.reload_product(product_index, quantity)
-#   @printer.print_successful_reload
-# end
-#
-# def reload_coin
-#   @printer.request_coin_selection
-#   denomination = STDIN.gets.chomp.to_i
-#   @printer.request_quantity
-#   quantity = STDIN.gets.chomp.to_i
-#   @change.insert_coin(denomination, quantity)
 #   @printer.print_successful_reload
 # end
