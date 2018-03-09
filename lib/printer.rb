@@ -1,9 +1,7 @@
 class Printer
-
   def print_welcome_message
     STDOUT.puts 'Welcome to The World\'s Best Vending Machine(TM).'
-    STDOUT.puts 'Did you know that the first known vending existed in Alexandria, Egypt, in the first century? Bet you didn\'t.
-    '
+    STDOUT.puts 'Did you know that the first known vending existed in Alexandria, Egypt, in the first century? Bet you didn\'t.'
   end
 
   def print_product_selection(merchandise)
