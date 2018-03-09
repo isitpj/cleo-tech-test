@@ -39,7 +39,7 @@ class Machine
 
   def process_user_selection
     dispense if @user_selection.class == Integer
-    reload if @user_selection == 'reload'
+    reload(Reload.new(@merchandise, @change)) if @user_selection == 'reload'
     exit if @user_selection == 'exit'
   end
 
@@ -56,29 +56,8 @@ class Machine
     @change_due = @change.return_change(coins, price) if sum(coins) > price
   end
 
-  def reload
-    @printer.print_reload_options
-    option = STDIN.gets.chomp.downcase
-    reload_product if option == 'product'
-    reload_coin if option == 'change'
-  end
-
-  def reload_product
-    @printer.print_product_selection(@merchandise)
-    product_index = STDIN.gets.chomp.to_i - 1
-    @printer.request_quantity
-    quantity = STDIN.gets.chomp.to_i
-    @merchandise.reload_product(product_index, quantity)
-    @printer.print_successful_reload
-  end
-
-  def reload_coin
-    @printer.request_coin_selection
-    denomination = STDIN.gets.chomp.to_i
-    @printer.request_quantity
-    quantity = STDIN.gets.chomp.to_i
-    @change.insert_coin(denomination, quantity)
-    @printer.print_successful_reload
+  def reload(reload)
+    reload.assign_product_or_change
   end
 
   def return_product
