@@ -224,8 +224,11 @@ describe Machine do
   end
 
   describe '#return_product' do
-    it 'calls the Printer class\'s #print_return_product method' do
+    before(:each) do
       allow(STDIN).to receive(:gets) { '1' }
+    end
+
+    it 'calls the Printer class\'s #print_return_product method' do
       printer = spy('printer')
       allow(Printer).to receive(:new) { printer }
       test_machine = Machine.new
@@ -235,7 +238,6 @@ describe Machine do
     end
 
     it 'resets @user_selection to nil' do
-      allow(STDIN).to receive(:gets) { '1' }
       machine.assign_user_selection
       machine.return_product
       expect(machine.user_selection).to eq nil
