@@ -39,5 +39,19 @@ describe Reload do
     end
   end
 
-  # describe '#reload_coin'
+  describe '#reload_coin' do
+    it 'prints three statements to the user' do
+      allow(STDOUT).to receive(:puts)
+      allow(STDIN).to receive(:gets).and_return('100', '5' )
+      reload.reload_coin
+      expect(STDOUT).to have_received(:puts).exactly(3).times
+    end
+
+    it 'gets user input twice' do
+      allow(STDOUT).to receive(:puts)
+      allow(STDIN).to receive(:gets).and_return('100', '5' )
+      reload.reload_coin
+      expect(STDIN).to have_received(:gets).twice
+    end
+  end
 end
