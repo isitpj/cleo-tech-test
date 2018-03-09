@@ -64,7 +64,7 @@ describe Machine do
   describe '#display_menu' do
     it 'calls puts on STDOUT' do
       machine.display_menu
-      expect(STDOUT).to have_received(:puts).at_least(1).times
+      expect(STDOUT).to have_received(:puts).exactly(11).times
     end
   end
 
