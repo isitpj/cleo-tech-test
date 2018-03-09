@@ -50,4 +50,8 @@ class Printer
       puts "#{coin}p"
     end
   end
+
+  def print_successful_reload
+    STDOUT.puts 'The vending machine has been reloaded. Well done you!'
+  end
 end
