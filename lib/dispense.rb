@@ -16,6 +16,18 @@ class Dispense
     @change_due = @change.return_change(coins, price) if sum(coins) > price
   end
 
+  def return_product
+    product = @merchandise.products[@selection]
+    @selection = nil
+    @printer.print_return_product(product)
+  end
+
+  def return_change
+    change = @change_due
+    @change_due = nil
+    @printer.print_return_change(change) unless change.nil?
+  end
+
   private
 
   def get_coins(price)
