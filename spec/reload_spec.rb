@@ -68,8 +68,16 @@ describe Reload do
   describe '#reload_product' do
     it 'prints three statements to the user' do
       allow(STDOUT).to receive(:puts)
+      allow(STDIN).to receive(:gets).and_return('1', '5')
       reload.reload_product
       expect(STDOUT).to have_received(:puts).exactly(10).times
+    end
+
+    it 'gets user input twice' do
+      allow(STDOUT).to receive(:puts)
+      allow(STDIN).to receive(:gets).and_return('1', '5')
+      reload.reload_product
+      expect(STDIN).to have_received(:gets).twice
     end
   end
 end
