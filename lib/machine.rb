@@ -39,7 +39,7 @@ class Machine
 
   def process_user_selection
     dispense if @user_selection.class == Integer
-    get_reload_option if @user_selection == 'reload'
+    reload if @user_selection == 'reload'
     exit if @user_selection == 'exit'
   end
 
@@ -56,7 +56,7 @@ class Machine
     @change_due = @change.return_change(coins, price) if sum(coins) > price
   end
 
-  def get_reload_option
+  def reload
     @printer.print_reload_options
     option = STDIN.gets.chomp.downcase
     reload_product if option == 'product'
@@ -90,7 +90,7 @@ class Machine
   def return_change
     change = @change_due
     @change_due = nil
-    @printer.print_return_change(change) if change != nil
+    @printer.print_return_change(change) unless change.nil?
   end
 
   private
