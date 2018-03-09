@@ -69,6 +69,7 @@ describe Reload do
     before(:each) do
       allow(STDOUT).to receive(:puts)
       allow(STDIN).to receive(:gets).and_return('1', '5')
+      allow(reload.merchandise).to receive(:reload_product)
       reload.reload_product
     end
 
@@ -78,6 +79,10 @@ describe Reload do
 
     it 'gets user input twice' do
       expect(STDIN).to have_received(:gets).twice
+    end
+
+    it 'calls the Merchandise class\'s #reload_product method' do
+      expect(reload.merchandise).to have_received(:reload_product).with(0, 5)
     end
   end
 end
