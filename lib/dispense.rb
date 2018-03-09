@@ -14,7 +14,7 @@ class Dispense
     @change_due = nil
   end
 
-  def dispense
+  def dispense_product
     price = @merchandise.products[@selection].price
     accept_coins(price)
     return_product

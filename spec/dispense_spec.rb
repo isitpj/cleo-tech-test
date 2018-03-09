@@ -37,17 +37,17 @@ describe Dispense do
     end
 
     it 'calls #accept_coins' do
-      dispense.dispense
+      dispense.dispense_product
       expect(dispense).to have_received(:accept_coins)
     end
 
     it 'calls #return_product' do
-      dispense.dispense
+      dispense.dispense_product
       expect(dispense).to have_received(:return_product)
     end
 
     it 'calls #return_change' do
-      dispense.dispense
+      dispense.dispense_product
       expect(dispense).to have_received(:return_change)
     end
   end

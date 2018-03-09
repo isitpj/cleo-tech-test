@@ -103,9 +103,9 @@ describe Machine do
   describe '#dispense' do
     it 'calls #dispense on an instance of Reload' do
       fake_dispense = double('dispense')
-      allow(fake_dispense).to receive(:dispense)
+      allow(fake_dispense).to receive(:dispense_product)
       machine.dispense(fake_dispense)
-      expect(fake_dispense).to have_received(:dispense)
+      expect(fake_dispense).to have_received(:dispense_product)
     end
   end
 

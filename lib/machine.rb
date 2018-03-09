@@ -45,7 +45,7 @@ class Machine
   end
 
   def dispense(dispense)
-    dispense.dispense
+    dispense.dispense_product
   end
 
   def reload(reload)
