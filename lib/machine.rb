@@ -11,7 +11,6 @@ class Machine
     @change = Change.new
     @printer = Printer.new
     @user_selection = nil
-    @change_due = nil
   end
 
   def start
@@ -38,61 +37,16 @@ class Machine
   end
 
   def process_user_selection
-    dispense if @user_selection.class == Integer
+    dispense(Dispense.new(@user_selection, @merchandise, @change)) if @user_selection.class == Integer
     reload(Reload.new(@merchandise, @change)) if @user_selection == 'reload'
     exit if @user_selection == 'exit'
   end
 
-  def dispense
-    price = @merchandise.products[@user_selection].price
-    accept_coins(price)
-    return_product
-    return_change
-  end
-
-  def accept_coins(price)
-    coins = get_coins(price)
-    coins.each { |coin| @change.insert_coin(coin, 1) }
-    @change_due = @change.return_change(coins, price) if sum(coins) > price
+  def dispense(dispense)
+    dispense.dispense
   end
 
   def reload(reload)
     reload.assign_product_or_change
-  end
-
-  def return_product
-    product = @merchandise.products[@user_selection]
-    @user_selection = nil
-    @printer.print_return_product(product)
-  end
-
-  def return_change
-    change = @change_due
-    @change_due = nil
-    @printer.print_return_change(change) unless change.nil?
-  end
-
-  private
-
-  def get_coins(price)
-    coins = [0]
-    while sum(coins) < price
-      inserted_coin = receive_coin
-      coins << inserted_coin if valid_coin?(inserted_coin)
-    end
-    coins.drop(1)
-  end
-
-  def sum(array)
-    array.reduce(:+)
-  end
-
-  def valid_coin?(inserted_coin)
-    VALID_DENOMINATIONS.include?(inserted_coin) ? true : @printer.invalid_coin_inserted
-  end
-
-  def receive_coin
-    @printer.request_coins
-    STDIN.gets.chomp.to_i
   end
 end
