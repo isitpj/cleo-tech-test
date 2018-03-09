@@ -1,6 +1,7 @@
 class Printer
+
   def print_welcome_message
-    STDOUT.puts 'Welcome to the World\'s Best Vending Machine(TM).'
+    STDOUT.puts 'Welcome to The World\'s Best Vending Machine(TM).'
     STDOUT.puts 'Did you know that the first known vending existed in Alexandria, Egypt, in the first century? Bet you didn\'t.
     '
   end
@@ -37,5 +38,16 @@ class Printer
 
   def request_coin_selection
     STDOUT.puts 'What denomination of coin would you like to reload? Please input either 1, 2, 5, 10, 20, 50, 100, or 200.'
+  end
+
+  def print_return_product(product)
+    STDOUT.puts "Thank you for visiting The World\'s Best vending Machine(TM). Please take your #{product.name}."
+  end
+
+  def print_return_change(change)
+    STDOUT.puts 'Please take your change:'
+    change.each do |coin|
+      puts "#{coin}p"
+    end
   end
 end
