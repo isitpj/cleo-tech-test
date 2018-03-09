@@ -29,7 +29,7 @@ class Printer
   end
 
   def print_reload_options
-    STDOUT.puts 'Would you like to reload products or change?'
+    STDOUT.puts 'Would you like to reload products or change? Please enter either \'Product\' or \'Change\'.'
   end
 
   def request_quantity
