@@ -35,7 +35,6 @@ class Dispense
 
   def return_change
     change = @change_due
-    @change_due = nil
     @printer.print_return_change(change) unless change.nil?
   end
 
