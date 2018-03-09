@@ -72,4 +72,20 @@ describe Printer do
       expect(STDOUT).to have_received(:puts)
     end
   end
+
+  describe '#print_return_product' do
+    it 'prints a string telling the user to take their product' do
+      product = double('product', name: 'Dairy Milk')
+      printer.print_return_product(product)
+      expect(STDOUT).to have_received(:puts)
+    end
+  end
+
+  describe '#print_return_change' do
+    it 'prints a string telling the user to take their change' do
+      change = [20, 10]
+      printer.print_return_change(change)
+      expect(STDOUT).to have_received(:puts).exactly(3).times
+    end
+  end
 end
