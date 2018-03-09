@@ -29,12 +29,17 @@ class Machine
 
   def assign_user_selection
     input = STDIN.gets.chomp.downcase
-    input == 'reload' ? @user_selection = input : @user_selection = input.to_i - 1
+    if input == 'reload' || input == 'exit'
+      @user_selection = input
+    else
+      @user_selection = input.to_i - 1
+    end
   end
 
   def process_user_selection
     dispense if @user_selection.class == Integer
     get_reload_option if @user_selection == 'reload'
+    exit if @user_selection == 'exit'
   end
 
   def dispense
@@ -106,9 +111,5 @@ class Machine
   def receive_coin
     @printer.request_coins
     STDIN.gets.chomp.to_i
-  end
-
-  def print_reload_options
-    @printer.print_reload_options
   end
 end
