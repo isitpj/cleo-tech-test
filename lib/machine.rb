@@ -1,6 +1,8 @@
 require_relative './merchandise'
 require_relative './change'
 require_relative './printer'
+require_relative './dispense'
+require_relative './reload'
 
 class Machine
   VALID_DENOMINATIONS = [200, 100, 50, 20, 10, 5, 2, 1]
