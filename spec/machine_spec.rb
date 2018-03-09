@@ -176,6 +176,14 @@ describe Machine do
       allow(machine).to receive(:reload_product)
     end
 
+    it 'should call the Printer class\'s #print_reload_options method' do
+      printer = spy('printer')
+      allow(Printer).to receive(:new) { printer }
+      test_machine = Machine.new
+      test_machine.get_reload_option
+      expect(printer).to have_received(:print_reload_options)
+    end
+
     it 'should get input from the user' do
       machine.get_reload_option
       expect(STDIN).to have_received(:gets)
