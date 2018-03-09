@@ -88,4 +88,11 @@ describe Printer do
       expect(STDOUT).to have_received(:puts).exactly(3).times
     end
   end
+
+  describe '#print_successful_reload' do
+    it 'prints a message informing the user that reloading the vending machine has been successful' do
+      printer.print_successful_reload
+      expect(STDOUT).to have_received(:puts)
+    end
+  end
 end
