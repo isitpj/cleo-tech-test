@@ -1,11 +1,15 @@
 require 'reload'
 
 describe Reload do
-  let(:reload) { described_class.new }
+  let(:reload) { described_class.new(Merchandise.new) }
 
   describe '#initialize' do
     it 'has a @printer variable that is an instance of Printer' do
       expect(reload.printer).to be_an_instance_of(Printer)
+    end
+
+    it 'has a merchandise variable that is an instance of Merchandise' do
+      expect(reload.merchandise).to be_an_instance_of(Merchandise)
     end
   end
 
@@ -25,5 +29,11 @@ describe Reload do
       reload.assign_product_or_change
       expect(STDIN).to have_received(:gets)
     end
+
+    xit 'calls #reload_coin' do
+
+    end
   end
+
+  # describe '#reload_coin'
 end
