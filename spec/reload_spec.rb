@@ -42,6 +42,13 @@ describe Reload do
       reload.assign_product_or_change
       expect(reload).to have_received(:reload_coin)
     end
+
+    it 'calls #reload_product' do
+      allow(STDIN).to receive(:gets) { 'product' }
+      allow(reload).to receive(:reload_product)
+      reload.assign_product_or_change
+      expect(reload).to have_received(:reload_product)
+    end
   end
 
   describe '#reload_coin' do
