@@ -15,6 +15,14 @@ class Reload
     @printer.print_reload_options
     selection = STDIN.gets.chomp
   end
+
+  def reload_coin
+    @printer.request_coin_selection
+    denomination = STDIN.gets.chomp
+    @printer.request_quantity
+    quantity = STDIN.gets.chomp
+    @printer.print_successful_reload
+  end
 end
 
 
