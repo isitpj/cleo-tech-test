@@ -96,12 +96,12 @@ describe Machine do
       expect(machine).to have_received(:dispense)
     end
 
-    it 'calls #get_reload_option' do
+    it 'calls #reload' do
       allow(STDIN).to receive(:gets) { 'reload' }
-      allow(machine).to receive(:get_reload_option)
+      allow(machine).to receive(:reload)
       machine.assign_user_selection
       machine.process_user_selection
-      expect(machine).to have_received(:get_reload_option)
+      expect(machine).to have_received(:reload)
     end
   end
 
@@ -169,7 +169,7 @@ describe Machine do
     end
   end
 
-  describe '#get_reload_option' do
+  describe '#reload' do
     before(:each) do
       allow(STDIN).to receive(:gets) { 'product' }
       allow(machine).to receive(:reload_coin)
@@ -180,23 +180,23 @@ describe Machine do
       printer = spy('printer')
       allow(Printer).to receive(:new) { printer }
       test_machine = Machine.new
-      test_machine.get_reload_option
+      test_machine.reload
       expect(printer).to have_received(:print_reload_options)
     end
 
     it 'should get input from the user' do
-      machine.get_reload_option
+      machine.reload
       expect(STDIN).to have_received(:gets)
     end
 
     it 'calls #reload_product' do
-      machine.get_reload_option
+      machine.reload
       expect(machine).to have_received(:reload_product)
     end
 
     it 'calls #reload_coin' do
       allow(STDIN).to receive(:gets) { 'change' }
-      machine.get_reload_option
+      machine.reload
       expect(machine).to have_received(:reload_coin)
     end
   end
