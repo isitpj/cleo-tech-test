@@ -7,6 +7,13 @@ describe Printer do
     allow(STDOUT).to receive(:puts)
   end
 
+  describe '#print_welcome_message' do
+    it 'prints a header message' do
+      printer.print_welcome_message
+      expect(STDOUT).to have_received(:puts).exactly(2).times
+    end
+  end
+
   describe '#print_product_selection' do
     it 'prints all the products in the vending machine' do
       product = double('product', name: 'Dairy Milk', price: 80)
@@ -26,7 +33,7 @@ describe Printer do
 
   describe '#print_reload_option' do
     it 'prints a string offering the user the option to reload the machine' do
-      printer.print_reload_option
+      printer.print_options_message
       expect(STDOUT).to have_received(:puts)
     end
   end
