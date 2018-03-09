@@ -24,12 +24,9 @@ class Reload
   end
 
   def reload_product
-    @printer.print_product_selection(@merchandise)
-    product_index = STDIN.gets.chomp.to_i - 1
-    @printer.request_quantity
-    quantity = STDIN.gets.chomp.to_i
-    @merchandise.reload_product(product_index, quantity)
-    @printer.print_successful_reload
+    product_index = assign_product_index
+    quantity = assign_quantity
+    reload_specified_products(product_index, quantity)
   end
 
   private
@@ -39,6 +36,11 @@ class Reload
     STDIN.gets.chomp.to_i
   end
 
+  def assign_product_index
+    @printer.print_product_selection(@merchandise)
+    STDIN.gets.chomp.to_i - 1
+  end
+
   def assign_quantity
     @printer.request_quantity
     STDIN.gets.chomp.to_i
@@ -46,6 +48,11 @@ class Reload
 
   def insert_coins(denomination, quantity)
     @change.insert_coin(denomination, quantity)
+    @printer.print_successful_reload
+  end
+
+  def reload_specified_products(index, quantity)
+    @merchandise.reload_product(index, quantity)
     @printer.print_successful_reload
   end
 end
