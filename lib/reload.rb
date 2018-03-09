@@ -28,6 +28,7 @@ class Reload
     product_index = STDIN.gets.chomp.to_i - 1
     @printer.request_quantity
     quantity = STDIN.gets.chomp.to_i
+    @merchandise.reload_product(product_index, quantity)
     @printer.print_successful_reload
   end
 
@@ -48,12 +49,3 @@ class Reload
     @printer.print_successful_reload
   end
 end
-
-
-
-
-
-
-# def reload_product
-#   @merchandise.reload_product(product_index, quantity)
-# end
