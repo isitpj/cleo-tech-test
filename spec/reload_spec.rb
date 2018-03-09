@@ -1,7 +1,7 @@
 require 'reload'
 
 describe Reload do
-  let(:reload) { described_class.new(Merchandise.new) }
+  let(:reload) { described_class.new(Merchandise.new, Change.new) }
 
   describe '#initialize' do
     it 'has a @printer variable that is an instance of Printer' do
@@ -10,6 +10,10 @@ describe Reload do
 
     it 'has a merchandise variable that is an instance of Merchandise' do
       expect(reload.merchandise).to be_an_instance_of(Merchandise)
+    end
+
+    it 'has a change variable that is an instance of Change' do
+      expect(reload.change).to be_an_instance_of(Change)
     end
   end
 
