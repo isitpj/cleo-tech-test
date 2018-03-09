@@ -18,9 +18,10 @@ class Reload
 
   def reload_coin
     @printer.request_coin_selection
-    denomination = STDIN.gets.chomp
+    denomination = STDIN.gets.chomp.to_i
     @printer.request_quantity
-    quantity = STDIN.gets.chomp
+    quantity = STDIN.gets.chomp.to_i
+    @change.insert_coin(denomination, quantity)
     @printer.print_successful_reload
   end
 end
