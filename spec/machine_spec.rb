@@ -24,10 +24,6 @@ describe Machine do
     it 'has a user_selection property that is nil by default' do
       expect(machine).to have_attributes(user_selection: nil)
     end
-
-    it 'has a change_due property that is nil by default' do
-      expect(machine).to have_attributes(change_due: nil)
-    end
   end
 
   describe '#start' do
@@ -90,7 +86,6 @@ describe Machine do
     it 'calls #dispense' do
       allow(STDIN).to receive(:gets) { '1' }
       allow(machine).to receive(:dispense)
-      allow(machine).to receive(:return_product)
       machine.assign_user_selection
       machine.process_user_selection
       expect(machine).to have_received(:dispense)
@@ -106,66 +101,11 @@ describe Machine do
   end
 
   describe '#dispense' do
-    before(:each) do
-      allow(STDIN).to receive(:gets) { '1' }
-      allow(machine).to receive(:accept_coins)
-      machine.assign_user_selection
-      allow(machine).to receive(:return_product)
-      allow(machine).to receive(:return_change)
-    end
-
-    it 'calls #accept_coins' do
-      machine.dispense
-      expect(machine).to have_received(:accept_coins)
-    end
-
-    it 'calls #return_product' do
-      machine.dispense
-      expect(machine).to have_received(:return_product)
-    end
-
-    it 'calls #return_change' do
-      machine.dispense
-      expect(machine).to have_received(:return_change)
-    end
-  end
-
-  describe '#accept_coins' do
-    before(:each) do
-      allow(STDIN).to receive(:gets).and_return('3', '50', '20', '20')
-    end
-
-    it 'calls gets to receive user input' do
-      machine.accept_coins(90)
-      expect(STDIN).to have_received(:gets).at_least(2).times
-    end
-
-    it 'will not accept coins that are not a valid denomination' do
-      machine.accept_coins(90)
-      expect(STDOUT).to have_received(:puts).with 'Sorry, that is not a valid denomination.'
-    end
-
-    it 'calls the Change class\'s insert_coin method for each coin inserted' do
-      change = spy('change')
-      allow(Change).to receive(:new) { change }
-      test_machine = Machine.new
-      test_machine.accept_coins(90)
-      expect(change).to have_received(:insert_coin).exactly(3).times
-    end
-
-    it 'returns 30p of change' do
-      allow(STDIN).to receive(:gets).and_return('3', '50', '20', '50')
-      expect(machine.accept_coins(90)).to eq [20, 10]
-    end
-
-    it 'returns 40p of change' do
-      allow(STDIN).to receive(:gets).and_return('20', '20', '20', '20', '50')
-      expect(machine.accept_coins(90)).to eq [20, 20]
-    end
-
-    it 'decreases the quantity of a coin stored' do
-      allow(STDIN).to receive(:gets).and_return('20', '20', '20', '20', '50')
-      expect { machine.accept_coins(90) }.to change { machine.change.coins[3].quantity }.from(20).to(22)
+    it 'calls #dispense on an instance of Reload' do
+      fake_dispense = double('dispense')
+      allow(fake_dispense).to receive(:dispense)
+      machine.dispense(fake_dispense)
+      expect(fake_dispense).to have_received(:dispense)
     end
   end
 
@@ -175,47 +115,6 @@ describe Machine do
       allow(fake_reload).to receive(:assign_product_or_change)
       machine.reload(fake_reload)
       expect(fake_reload).to have_received(:assign_product_or_change)
-    end
-  end
-
-  describe '#return_product' do
-    before(:each) do
-      allow(STDIN).to receive(:gets) { '1' }
-    end
-
-    it 'calls the Printer class\'s #print_return_product method' do
-      printer = spy('printer')
-      allow(Printer).to receive(:new) { printer }
-      test_machine = Machine.new
-      test_machine.assign_user_selection
-      test_machine.return_product
-      expect(printer).to have_received(:print_return_product)
-    end
-
-    it 'resets @user_selection to nil' do
-      machine.assign_user_selection
-      machine.return_product
-      expect(machine.user_selection).to eq nil
-    end
-  end
-
-  describe '#return_change' do
-    before(:each) do
-      allow(STDIN).to receive(:gets).and_return('50', '20', '20')
-    end
-
-    it 'calls the Printer class\'s #print_return_change method' do
-      machine.accept_coins(80)
-      expect(machine.return_change[0]).to be_an(Integer)
-    end
-
-    it 'resets @change_due to nil' do
-      printer = spy('printer')
-      allow(Printer).to receive(:new) { printer }
-      test_machine = Machine.new
-      test_machine.accept_coins(80)
-      test_machine.return_change
-      expect(printer).to have_received(:print_return_change)
     end
   end
 end
