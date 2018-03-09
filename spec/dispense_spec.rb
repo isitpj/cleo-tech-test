@@ -97,6 +97,14 @@ describe Dispense do
       allow(STDIN).to receive(:gets) { '1' }
     end
 
+    it 'calls the Merchandise class\'s #release_product method' do
+      merchandise = spy('merchandise')
+      change = double('change')
+      test_dispense = Dispense.new(1, merchandise, change)
+      test_dispense.return_product
+      expect(merchandise).to have_received(:release_product).with(1) 
+    end
+
     it 'calls the Printer class\'s #print_return_product method' do
       printer = spy('printer')
       allow(Printer).to receive(:new) { printer }
