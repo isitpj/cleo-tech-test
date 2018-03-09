@@ -57,6 +57,7 @@ class Machine
   end
 
   def get_reload_option
+    @printer.print_reload_options
     option = STDIN.gets.chomp.downcase
     reload_product if option == 'product'
     reload_coin if option == 'change'
@@ -87,7 +88,7 @@ class Machine
   def return_change
     change = @change_due
     @change_due = nil
-    @printer.print_return_change(change)
+    @printer.print_return_change(change) if change != nil
   end
 
   private
