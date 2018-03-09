@@ -216,10 +216,14 @@ describe Machine do
   end
 
   describe '#return_product' do
-    it 'returns a Product object' do
+    it 'calls the Printer class\'s #print_return_product method' do
       allow(STDIN).to receive(:gets) { '1' }
-      machine.assign_user_selection
-      expect(machine.return_product).to be_an_instance_of(Product)
+      printer = spy('printer')
+      allow(Printer).to receive(:new) { printer }
+      test_machine = Machine.new
+      test_machine.assign_user_selection
+      test_machine.return_product
+      expect(printer).to have_received(:print_return_product)
     end
 
     it 'resets @user_selection to nil' do
@@ -235,15 +239,18 @@ describe Machine do
       allow(STDIN).to receive(:gets).and_return('50', '20', '20')
     end
 
-    it 'returns an array of integer values' do
+    it 'calls the Printer class\'s #print_return_change method' do
       machine.accept_coins(80)
       expect(machine.return_change[0]).to be_an(Integer)
     end
 
     it 'resets @change_due to nil' do
-      machine.accept_coins(80)
-      machine.return_change
-      expect(machine.change_due).to eq nil
+      printer = spy('printer')
+      allow(Printer).to receive(:new) { printer }
+      test_machine = Machine.new
+      test_machine.accept_coins(80)
+      test_machine.return_change
+      expect(printer).to have_received(:print_return_change)
     end
   end
 end
