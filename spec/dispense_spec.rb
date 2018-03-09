@@ -29,6 +29,29 @@ describe Dispense do
     end
   end
 
+  describe '#dispense' do
+    before(:each) do
+      allow(dispense).to receive(:accept_coins)
+      allow(dispense).to receive(:return_product)
+      allow(dispense).to receive(:return_change)
+    end
+
+    it 'calls #accept_coins' do
+      dispense.dispense
+      expect(dispense).to have_received(:accept_coins)
+    end
+
+    it 'calls #return_product' do
+      dispense.dispense
+      expect(dispense).to have_received(:return_product)
+    end
+
+    it 'calls #return_change' do
+      dispense.dispense
+      expect(dispense).to have_received(:return_change)
+    end
+  end
+
   describe '#accept_coins' do
     before(:each) do
       allow(STDIN).to receive(:gets).and_return('3', '50', '20', '20')
