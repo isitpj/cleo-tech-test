@@ -1,5 +1,4 @@
 require 'merchandise'
-require 'product'
 
 describe Merchandise do
   let(:merchandise) { described_class.new }
