@@ -17,14 +17,18 @@ class Dispense
   def dispense_product
     price = @merchandise.products[@selection].price
     accept_coins(price)
-    return_product
-    return_change
+    return_product_and_change
   end
 
   def accept_coins(price)
     coins = get_coins(price)
     coins.each { |coin| @change.insert_coin(coin, 1) }
     @change_due = @change.return_change(coins, price) if sum(coins) > price
+  end
+
+  def return_product_and_change
+    return_product
+    return_change
   end
 
   def return_product
