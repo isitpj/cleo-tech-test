@@ -2,6 +2,10 @@ require 'reload'
 
 describe Reload do
   let(:reload) { described_class.new(Merchandise.new, Change.new) }
+  
+  before(:each) do
+    allow(STDOUT).to receive(:puts)
+  end
 
   describe '#initialize' do
     it 'has a @printer variable that is an instance of Printer' do
@@ -20,7 +24,6 @@ describe Reload do
   describe '#assign_product_or_change' do
     before(:each) do
       allow(STDIN).to receive(:gets) { 'change' }
-      allow(STDOUT).to receive(:puts)
     end
 
     it 'calls the Printer class\'s #print_reload_options method' do
@@ -53,7 +56,6 @@ describe Reload do
 
   describe '#reload_coin' do
     before(:each) do
-      allow(STDOUT).to receive(:puts)
       allow(STDIN).to receive(:gets).and_return('100', '5' )
       allow(reload.change).to receive(:insert_coin)
       reload.reload_coin
@@ -74,7 +76,6 @@ describe Reload do
 
   describe '#reload_product' do
     before(:each) do
-      allow(STDOUT).to receive(:puts)
       allow(STDIN).to receive(:gets).and_return('1', '5')
       allow(reload.merchandise).to receive(:reload_product)
       reload.reload_product
