@@ -15,6 +15,8 @@ class Dispense
   end
 
   def dispense_product
+    quantity = @merchandise.products[@selection].quantity
+    return @printer.print_sold_out_message if quantity == 0
     price = @merchandise.products[@selection].price
     accept_coins(price)
     return_product_and_change
