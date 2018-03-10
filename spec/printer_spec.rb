@@ -58,6 +58,13 @@ describe Printer do
     end
   end
 
+  describe '#print_sold_out_message' do
+    it 'prints a message informing the user that the item is sold out' do
+      printer.print_sold_out_message
+      expect(STDOUT).to have_received(:puts)
+    end
+  end
+
   describe '#print_reload_options' do
     it 'prints a string asking the user if they would like to reload products or change' do
       printer.print_reload_options
