@@ -27,26 +27,26 @@ describe Reload do
       printer = spy('printer')
       allow(Printer).to receive(:new) { printer }
       allow_any_instance_of(Change).to receive(:insert_coin)
-      reload.assign_product_or_change
+      reload.assign_selection_and_reload
       expect(printer).to have_received(:print_reload_options)
     end
 
     it 'calls gets to receive user input' do
       allow(reload).to receive(:reload_coin)
-      reload.assign_product_or_change
+      reload.assign_selection_and_reload
       expect(STDIN).to have_received(:gets)
     end
 
     it 'calls #reload_coin' do
       allow(reload).to receive(:reload_coin)
-      reload.assign_product_or_change
+      reload.assign_selection_and_reload
       expect(reload).to have_received(:reload_coin)
     end
 
     it 'calls #reload_product' do
       allow(STDIN).to receive(:gets) { 'product' }
       allow(reload).to receive(:reload_product)
-      reload.assign_product_or_change
+      reload.assign_selection_and_reload
       expect(reload).to have_received(:reload_product)
     end
   end
