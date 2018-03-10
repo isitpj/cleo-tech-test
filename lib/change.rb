@@ -55,7 +55,7 @@ class Change
     until sum(change) == change_due
       @coins.each do |coin|
         if coin.value <= remainder
-          change, remainder = add_coin_to_change_and_release(coin, remainder, change)
+          change, remainder = update_remainder_and_release(coin, remainder, change)
           break
         end
       end
@@ -63,7 +63,7 @@ class Change
     change
   end
 
-  def add_coin_to_change_and_release(coin, remainder, change)
+  def update_remainder_and_release(coin, remainder, change)
     change << coin.value
     remainder -= coin.value
     release_coin(coin.value, 1)
