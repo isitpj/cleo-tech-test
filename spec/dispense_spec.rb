@@ -30,11 +30,22 @@ describe Dispense do
     end
   end
 
-  describe '#dispense' do
+  describe '#dispense_product' do
     before(:each) do
       allow(dispense).to receive(:accept_coins)
       allow(dispense).to receive(:return_product)
       allow(dispense).to receive(:return_change)
+    end
+
+    it 'calls the Printer\'s #print_sold_out_message method' do
+      printer = spy('printer')
+      allow(Printer).to receive(:new) { printer }
+      change = double('change')
+      product = double('product', name: 'Dairy Milk', quantity: 0)
+      merchandise = double('merchandise', products: [product])
+      test_dispense = Dispense.new(0, merchandise, change)
+      test_dispense.dispense_product
+      expect(printer).to have_received(:print_sold_out_message)
     end
 
     it 'calls #accept_coins' do
