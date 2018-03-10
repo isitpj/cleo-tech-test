@@ -16,7 +16,7 @@ describe Printer do
 
   describe '#print_product_selection' do
     it 'prints all the products in the vending machine' do
-      product = double('product', name: 'Dairy Milk', price: 80)
+      product = double('product', name: 'Dairy Milk', price: 80, quantity: 5)
       merchandise = double('merchandise', products: [product])
       printer.print_product_selection(merchandise)
       expect(STDOUT).to have_received(:puts)
@@ -25,9 +25,15 @@ describe Printer do
 
   describe '#print_product' do
     it 'prints out a product' do
-      product = double('product', name: 'Dairy Milk', price: 80)
-      printer.print_product(product, 1)
-      expect(STDOUT).to have_received(:puts)
+      product = double('product', name: 'Dairy Milk', price: 80, quantity: 5)
+      printer.print_product(product, 0)
+      expect(STDOUT).to have_received(:puts).with "1. Dairy Milk. Price: 80p"
+    end
+
+    it 'prints that the product is sold out if its quantity is 0' do
+      product = double('product', name: 'Dairy Milk', quantity: 0)
+      printer.print_product(product, 0)
+      expect(STDOUT).to have_received(:puts).with "1. Dairy Milk. SOLD OUT."
     end
   end
 
