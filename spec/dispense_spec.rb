@@ -89,6 +89,20 @@ describe Dispense do
     end
   end
 
+  describe '#return_product_and_change' do
+    it 'calls #return_product' do
+      allow(dispense).to receive(:return_product)
+      dispense.return_product_and_change
+      expect(dispense).to have_received(:return_product)
+    end
+
+    it 'calls #return_change' do
+      allow(dispense).to receive(:return_change)
+      dispense.return_product_and_change
+      expect(dispense).to have_received(:return_change)
+    end
+  end
+
   describe '#return_product' do
     before(:each) do
       allow(STDIN).to receive(:gets) { '1' }
