@@ -11,7 +11,8 @@ class Printer
   end
 
   def print_product(product, index)
-    STDOUT.puts "#{index + 1}. #{product.name}. Price: #{product.price}"
+    STDOUT.puts "#{index + 1}. #{product.name}. Price: #{product.price}p" if product.quantity > 0
+    STDOUT.puts "#{index + 1}. #{product.name}. SOLD OUT." if product.quantity if product.quantity <= 0
   end
 
   def print_options_message
