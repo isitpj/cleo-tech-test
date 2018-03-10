@@ -62,7 +62,11 @@ In terms of the logic of the application, the biggest challenge was to return th
 Currently, the machine only accepts coins in units of pence (i.e. £100 is represented instead as 100p). In a deployed, production version of this project, this would need to be implemented, but in terms of producing a functioning application in this scenario, this addition felt unnecessary, given that the machine works as it should.
 
 *Method privacy*   
-werh
+One part of this code that I am not entirely comfortable with is the privacy of methods, especially within higher-level classes such as `Machine` that deal with user interaction, in which they have essentially one method that then calls other methods in response to user input. In this, some of the other routing methods are public, even though they should not be directly called by the user. This occurred as a result of working on small bits of code throughout the TDD process, and then moving things together later. However, moving these methods to private would lead to long, inelegant setups needed in test blocks in order to test for every eventuality. However, given the way the application works, using a looped menu method in the command line, it is not possible for the user to actually call any of these methods whilst using the application. On balance, I feel like leaving methods scoped as they are is preferable to longer, inelegant setup code in tests, even though the current implementation is not perfect.
+
+*Isolating tests*   
+In the spec files for the `Dispense` and `Reload` classes, the respective objects under tests are both initialised with real `Change` and `Merchandise` objects, rather than doubles. I am not entirely happy with this, as this means that these spec files are not completely isolated. However, RSpec doubles are not available in example groups, and so creating doubles and injecting them is not possible. I have solved this by mocking any methods called by either of these objects during the tests, and so the only real method either of these classes call is the `new` method - which is a part of Ruby, and so can be assumed to work correctly. I found this solution preferable to instantiating `Reload` or `Dispense` with doubles in every `it` block, which would have led to lots of repetition in the codebase.
+
 
 -----------
 If you have any suggestions or feedback on either this project or its documentation, please [open an issue](https://github.com/peterwdj/cleo-tech-test/issues/new).
