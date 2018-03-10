@@ -46,7 +46,7 @@ When considering how I would approach this project, one of the first things that
 
 In terms of developing the application itself, I took a bottom-up approach. That is to say, I started off by creating the classes for the smallest objects in the hierarchy(the `Coin` and `Product` classes), working up the chain into the `Change` and `Merchandise` classes (which would store and pass messages onto the objects they contain), up to the top-level `Machine` class. As I was building the `Machine` class, it quickly became apparent that there was much too much taking place in this class (partly due to my tendency to try to map computer objects too closely to their real-world counterparts). I therefore decided to extract all communication from the vending machine to the user to a `Printer` class, the sole responsibility of which would be to print statements to the user, as well as creating `Reload` and `Dispense` classes to handle carry out the logic of each function. This then left `Machine` as a class with the sole responsibility of receiving and processing input from the user.
 
-All development took place in a test-driven manner which, alongside the test coverage tool, [SimpleCov](https://github.com/colszowka/simplecov), allowed me to ensure that the application was fully tested. Moreover, working in this way allowed me to focus my development, working on small features at a time to created a cohesive application. 
+All development took place in a test-driven manner which, alongside the test coverage tool, [SimpleCov](https://github.com/colszowka/simplecov), allowed me to ensure that the application was fully tested. Moreover, working in this way allowed me to focus my development, working on small features at a time to created a cohesive application.
 
 
 ## Challenges
@@ -60,6 +60,9 @@ In terms of the logic of the application, the biggest challenge was to return th
 
 *Coin units*   
 Currently, the machine only accepts coins in units of pence (i.e. £100 is represented instead as 100p). In a deployed, production version of this project, this would need to be implemented, but in terms of producing a functioning application in this scenario, this addition felt unnecessary, given that the machine works as it should.
+
+*Method privacy*   
+werh
 
 -----------
 If you have any suggestions or feedback on either this project or its documentation, please [open an issue](https://github.com/peterwdj/cleo-tech-test/issues/new).

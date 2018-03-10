@@ -48,6 +48,6 @@ class Machine
   end
 
   def reload(reload)
-    reload.assign_product_or_change
+    reload.assign_selection_and_reload
   end
 end

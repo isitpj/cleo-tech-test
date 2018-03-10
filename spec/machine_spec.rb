@@ -117,12 +117,12 @@ describe Machine do
     it 'calls #assign_product_or_change on an instance of Reload' do
       fake_reload = double('reload')
       allow(fake_reload).to receive_messages(
-        assign_product_or_change: nil,
+        assign_selection_and_reload: nil,
         merchandise: nil,
         change: nil
       )
       machine.reload(fake_reload)
-      expect(fake_reload).to have_received(:assign_product_or_change)
+      expect(fake_reload).to have_received(:assign_selection_and_reload)
     end
   end
 end
