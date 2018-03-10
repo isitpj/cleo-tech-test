@@ -5,7 +5,6 @@ require_relative './dispense'
 require_relative './reload'
 
 class Machine
-  VALID_DENOMINATIONS = [200, 100, 50, 20, 10, 5, 2, 1]
   attr_reader :merchandise, :change, :printer, :user_selection, :change_due
 
   def initialize
