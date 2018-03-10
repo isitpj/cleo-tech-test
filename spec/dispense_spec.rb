@@ -5,6 +5,7 @@ describe Dispense do
 
   before(:each) do
     allow(STDOUT).to receive(:puts)
+    allow(STDIN).to receive(:gets).and_return('3', '50', '20', '20')
   end
 
   describe '#initialize' do
@@ -53,10 +54,6 @@ describe Dispense do
   end
 
   describe '#accept_coins' do
-    before(:each) do
-      allow(STDIN).to receive(:gets).and_return('3', '50', '20', '20')
-    end
-
     it 'calls gets to receive user input' do
       dispense.accept_coins(90)
       expect(STDIN).to have_received(:gets).at_least(2).times
@@ -102,13 +99,19 @@ describe Dispense do
       change = double('change')
       test_dispense = Dispense.new(1, merchandise, change)
       test_dispense.return_product
-      expect(merchandise).to have_received(:release_product).with(1) 
+      expect(merchandise).to have_received(:release_product).with(1)
     end
 
     it 'calls the Printer class\'s #print_return_product method' do
+      merchandise = double('merchandise')
+      allow(merchandise).to receive_messages(
+        products: [double, double],
+        release_product: nil
+      )
+      change = double('change')
       printer = spy('printer')
       allow(Printer).to receive(:new) { printer }
-      test_dispense = Dispense.new(1, Merchandise.new, Change.new)
+      test_dispense = Dispense.new(1, merchandise, change)
       test_dispense.return_product
       expect(printer).to have_received(:print_return_product)
     end
@@ -120,10 +123,6 @@ describe Dispense do
   end
 
   describe '#return_change' do
-    before(:each) do
-      allow(STDIN).to receive(:gets).and_return('50', '20', '20')
-    end
-
     it 'calls the Printer class\'s #print_return_change method' do
       dispense.accept_coins(80)
       expect(dispense.return_change[0]).to be_an(Integer)
