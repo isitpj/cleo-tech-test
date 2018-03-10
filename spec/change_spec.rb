@@ -1,8 +1,9 @@
 require 'change'
-require 'coin'
 
 describe Change do
   let(:change) { described_class.new }
+  let(:coin) { spy('coin') }
+
   describe '#initialize' do
     it 'has a coins attribute that is an array' do
       expect(change.coins).to be_an(Array)
@@ -16,7 +17,6 @@ describe Change do
   describe '#release_coin' do
     it 'calls the coin\'s release method' do
       puts 'Huh, ReleaseCoin? That\'d be a terrible name for a crypto token.'
-      coin = spy('coin')
       test_change = stub_generate_coins(coin)
       test_change.release_coin(1, 1)
       expect(coin).to have_received(:release).with(1)
@@ -26,7 +26,6 @@ describe Change do
   describe '#insert_coin' do
     it 'calls the coin\'s insert method' do
       puts 'Not sure InsertCoin is a much better name either...'
-      coin = spy('coin')
       test_change = stub_generate_coins(coin)
       test_change.insert_coin(1, 7)
       expect(coin).to have_received(:insert).with(7)
@@ -39,7 +38,6 @@ describe Change do
     end
 
     it 'returns 40p of change' do
-      allow(STDIN).to receive(:gets).and_return('20', '20', '20', '20', '50')
       expect(change.return_change([20, 20, 20, 20, 50], 90)).to eq [20, 20]
     end
   end
