@@ -27,6 +27,10 @@ class Printer
     STDOUT.puts 'Sorry, that is not a valid denomination.'
   end
 
+  def print_sold_out_message
+    STDOUT.puts 'Sorry, that item is sold out.' 
+  end
+
   def print_reload_options
     STDOUT.puts 'Would you like to reload products or change? Please enter either \'Product\' or \'Change\'.'
   end
