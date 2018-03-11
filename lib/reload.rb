@@ -14,8 +14,9 @@ class Reload
   def assign_selection_and_reload
     @printer.print_reload_options
     selection = STDIN.gets.chomp
-    reload_coin if selection == 'change'
-    reload_product if selection == 'product'
+    return reload_coin if selection == 'change'
+    return reload_product if selection == 'product'
+    @printer.print_invalid_selection
   end
 
   def reload_coin
