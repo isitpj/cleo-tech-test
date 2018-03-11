@@ -2,7 +2,7 @@ require 'reload'
 
 describe Reload do
   let(:reload) { described_class.new(Merchandise.new, Change.new) }
-  
+
   before(:each) do
     allow(STDOUT).to receive(:puts)
   end
@@ -21,7 +21,7 @@ describe Reload do
     end
   end
 
-  describe '#assign_product_or_change' do
+  describe '#assign_selection_and_reload' do
     before(:each) do
       allow(STDIN).to receive(:gets) { 'change' }
     end
@@ -51,6 +51,15 @@ describe Reload do
       allow(reload).to receive(:reload_product)
       reload.assign_selection_and_reload
       expect(reload).to have_received(:reload_product)
+    end
+
+    it 'calls the Printer class\'s #print_invalid_selection method' do
+      printer = spy('printer')
+      allow(Printer).to receive(:new) { printer }
+      allow_any_instance_of(Change).to receive(:insert_coin)
+      allow(STDIN).to receive(:gets) { 'all of your products pls' }
+      reload.assign_selection_and_reload
+      expect(printer).to have_received(:print_invalid_selection)
     end
   end
 
