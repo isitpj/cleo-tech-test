@@ -14,7 +14,6 @@ This is a tech test for [Cleo](https://www.meetcleo.com/), modeling a vending ma
 
 
 ## Quickstart
-Limitations
 
 *Running the application*    
 Running the application is simple. First make sure you have Ruby installed. Then, clone this repository, and run:
