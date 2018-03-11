@@ -91,7 +91,7 @@ describe Reload do
     end
 
     it 'prints three statements to the user' do
-      expect(STDOUT).to have_received(:puts).exactly(10).times
+      expect(STDOUT).to have_received(:puts).exactly(15).times
     end
 
     it 'gets user input twice' do

@@ -60,7 +60,7 @@ describe Machine do
   describe '#display_menu' do
     it 'calls puts on STDOUT' do
       machine.display_menu
-      expect(STDOUT).to have_received(:puts).exactly(11).times
+      expect(STDOUT).to have_received(:puts).exactly(16).times
     end
   end
 
@@ -102,7 +102,7 @@ describe Machine do
     it 'calls Printer#print_invalid_selection' do
       printer = spy('printer')
       allow(Printer).to receive(:new) { printer }
-      allow(STDIN).to receive(:gets) { '12' }
+      allow(STDIN).to receive(:gets) { '22' }
       test_machine = Machine.new
       test_machine.assign_user_selection
       test_machine.process_user_selection
