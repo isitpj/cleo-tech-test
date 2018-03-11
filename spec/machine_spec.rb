@@ -108,6 +108,14 @@ describe Machine do
       test_machine.process_user_selection
       expect(printer).to have_received(:print_invalid_selection)
     end
+
+    it 'resets user_selection to nil' do
+      allow(STDIN).to receive(:gets) { '1' }
+      allow(machine).to receive(:dispense)
+      machine.assign_user_selection
+      machine.process_user_selection
+      expect(machine.user_selection).to eq nil
+    end
   end
 
   describe '#dispense' do
