@@ -54,7 +54,7 @@ describe Printer do
   describe '#request_coins' do
     it 'prints a string asking the user to insert coins' do
       printer.request_coins
-      expect(STDOUT).to have_received(:puts).with 'Please insert coins.'
+      expect(STDOUT).to have_received(:puts).with 'Please insert coins in units of pence (e.g. "1", "50", "200").'
     end
   end
 

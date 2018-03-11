@@ -24,7 +24,7 @@ class Printer
   end
 
   def request_coins
-    STDOUT.puts 'Please insert coins.'
+    STDOUT.puts 'Please insert coins in units of pence (e.g. "1", "50", "200").'
   end
 
   def invalid_coin_inserted
