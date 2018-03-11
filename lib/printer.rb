@@ -20,7 +20,7 @@ class Printer
   end
 
   def print_invalid_selection
-    STDOUT.puts 'Sorry, that selection was invalid selection. Please make another.'
+    STDOUT.puts 'Sorry, that selection was invalid. Please make another.'
   end
 
   def request_coins
