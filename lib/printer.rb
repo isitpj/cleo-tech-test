@@ -19,6 +19,10 @@ class Printer
     STDOUT.puts 'Please enter a number to make your selection, \'Reload\' if you would like to add more products to the machine, or \'Exit\' if you do not wish to be trapped inside a command-line vending machine for all eternity.'
   end
 
+  def print_invalid_selection
+    STDOUT.puts 'Sorry, that selection was invalid selection. Please make another.'
+  end
+
   def request_coins
     STDOUT.puts 'Please insert coins.'
   end
@@ -28,7 +32,7 @@ class Printer
   end
 
   def print_sold_out_message
-    STDOUT.puts 'Sorry, that item is sold out.' 
+    STDOUT.puts 'Sorry, that item is sold out.'
   end
 
   def print_reload_options
