@@ -16,22 +16,21 @@ This is a tech test for [Cleo](https://www.meetcleo.com/), modeling a vending ma
 ## Quickstart
 
 *Running the application*    
-Running the application is simple. First make sure you have Ruby installed. Then, clone this repository, and run:
+Running the application is simple. First make sure you have Ruby and [Bundler](http://bundler.io/) installed. Then, clone this repository, and install dependencies:
+
+```
+bundle install
+```
+Ensure you are running Ruby 2.4.1 as specified (you can use [RVM](https://rvm.io/) to manage Ruby versions), and then launch the application:
 
 ```
 ruby main.rb
 ```
 
-This will launch you into the application. From there, the program will print instructions at each stage of interaction with the application.
+From there, the program will print instructions at each stage of interaction with the application.
 
 *Running the tests*   
-You will need to install dependencies (specifically, RSpec) before running the tests. Make sure you have [Bundler](http://bundler.io/) installed, and then run:
-
-```
-bundle install
-```
-
-Then, run RSpec to run the tests:
+Tests are run with RSpec:
 
 ```
 rspec                                ## runs the entire test suite
