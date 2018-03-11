@@ -40,5 +40,10 @@ describe Change do
     it 'returns 40p of change' do
       expect(change.return_change([20, 20, 20, 20, 50], 90)).to eq [20, 20]
     end
+
+    it 'returns 40p of change as a twenty and two tens' do
+      change.release_coin(20, 19)
+      expect(change.return_change([20, 20, 20, 20, 50], 90)).to eq [20, 10, 10]
+    end
   end
 end
