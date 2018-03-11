@@ -33,13 +33,14 @@ class Machine
     return @user_selection = input if input == 'reload' || input == 'exit'
     input = input.to_i - 1
     return @user_selection = input if input >= 0 && input < @merchandise.products.length
-    @printer.print_invalid_selection
+    return @printer.print_invalid_selection
   end
 
   def process_user_selection
     dispense(Dispense.new(@user_selection, @merchandise, @change)) if @user_selection.class == Integer
     reload(Reload.new(@merchandise, @change)) if @user_selection == 'reload'
     exit if @user_selection == 'exit'
+    @user_selection = nil
   end
 
   def dispense(dispense)
