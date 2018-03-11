@@ -98,6 +98,16 @@ describe Machine do
       machine.process_user_selection
       expect(machine).to have_received(:reload)
     end
+
+    it 'calls Printer#print_invalid_selection' do
+      printer = spy('printer')
+      allow(Printer).to receive(:new) { printer }
+      allow(STDIN).to receive(:gets) { '12' }
+      test_machine = Machine.new
+      test_machine.assign_user_selection
+      test_machine.process_user_selection
+      expect(printer).to have_received(:print_invalid_selection)
+    end
   end
 
   describe '#dispense' do
