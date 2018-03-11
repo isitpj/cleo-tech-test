@@ -21,14 +21,19 @@ class Merchandise
 
   def generate_products
     [
-      Product.new('Kit Kat', 90),
-      Product.new('Dairy Milk', 80),
-      Product.new('Walkers Salt and Vinegar Crisps', 110),
-      Product.new('Walkers Cheese and Onion Crisps', 110),
-      Product.new('Coke', 180),
-      Product.new('Diet Coke', 180),
-      Product.new('Pepsi', 150),
-      Product.new('Diet Pepsi', 150)
+      Product.new('Cupcake', 90),
+      Product.new('Donut', 80),
+      Product.new('Eclair', 110),
+      Product.new('Froyo', 110),
+      Product.new('Gingerbread', 180),
+      Product.new('Honeycomb', 10),
+      Product.new('Ice Cream Sandwich', 180),
+      Product.new('Jelly Bean', 150),
+      Product.new('Kit Kat', 120),
+      Product.new('Lollipop', 80),
+      Product.new('Marshmallow', 100),
+      Product.new('Nougat', 70),
+      Product.new('Oreo', 160)
     ]
   end
 end
