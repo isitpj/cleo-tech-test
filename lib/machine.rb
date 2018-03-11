@@ -30,11 +30,10 @@ class Machine
 
   def assign_user_selection
     input = STDIN.gets.chomp.downcase
-    if input == 'reload' || input == 'exit'
-      @user_selection = input
-    else
-      @user_selection = input.to_i - 1
-    end
+    return @user_selection = input if input == 'reload' || input == 'exit'
+    input = input.to_i - 1
+    return @user_selection = input if input >= 0 && input < @merchandise.products.length
+    @printer.print_invalid_selection
   end
 
   def process_user_selection
