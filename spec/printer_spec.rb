@@ -37,6 +37,13 @@ describe Printer do
     end
   end
 
+  describe '#print_invalid_selection' do
+    it 'prints a message informing the user that they have made an invalid selection' do
+      printer.print_invalid_selection
+      expect(STDOUT).to have_received(:puts)
+    end
+  end
+
   describe '#print_reload_option' do
     it 'prints a string offering the user the option to reload the machine' do
       printer.print_options_message
